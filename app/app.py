@@ -20,7 +20,8 @@ from explain import gradcam_overlay, preprocess
 APP_MODEL = os.path.join(RESULTS_DIR, "app_model.pt")
 MODEL_PATH = APP_MODEL if os.path.exists(APP_MODEL) else A1_CHECKPOINT
 INDEX_PATH = os.path.join(RESULTS_DIR, "index.npz")
-SYN_DIR = os.path.join("synthetic", "accepted")
+ASSETS = os.path.join(os.path.dirname(os.path.abspath(__file__)), "assets")
+SYN_DIR = os.path.join(ASSETS, "synthetic")
 
 st.set_page_config(page_title="Food classifier", layout="wide")
 
@@ -34,6 +35,12 @@ def get_model():
 def get_index():
     d = np.load(INDEX_PATH, allow_pickle=True)
     return d["feats"], d["labels"], d["paths"]
+
+
+def thumb(path, label):
+    """Thumbnail shipped with the app (full dataset is not in git)."""
+    name = os.path.splitext(os.path.basename(str(path)))[0] + ".jpg"
+    return os.path.join(ASSETS, "train", CLASSES[label], name)
 
 
 model = get_model()
@@ -87,7 +94,7 @@ with tab_demo:
         sims = feats @ q
         top = np.argsort(-sims)[:5]
         for col, i in zip(st.columns(5), top):
-            col.image(str(paths[i]), caption=f"{CLASSES[labels[i]]}  {sims[i]:.2f}", width="stretch")
+            col.image(thumb(paths[i], labels[i]), caption=f"{CLASSES[labels[i]]}  {sims[i]:.2f}", width="stretch")
 
 with tab_joke:
     st.caption("A joke mode inspired by the 'Not Hotdog' gag from the TV show Silicon Valley. "
@@ -123,4 +130,4 @@ with tab_syn:
                 for col, f in zip(st.columns(5), files):
                     col.image(os.path.join(d, f), caption="synthetic", width="stretch")
     if not shown:
-        st.info("No accepted synthetic images yet. Run generate_synthetic.py and filter_synthetic.py.")
+        st.info("No accepted synthetic images yet. Run src/build_app_assets.py.")

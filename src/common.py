@@ -8,7 +8,8 @@ import torch.nn as nn
 from torchvision import datasets, models, transforms
 
 SPLIT_DIR = "dataset_split"
-RESULTS_DIR = "results"
+RESULTS_DIR = "results/a2"
+A1_CHECKPOINT = "results/a1/efficientnet_best.pt"  # A1 EfficientNet-B0 (79.7% test acc)
 CLASSES = ["burger", "hotdog", "pizza", "sandwich", "sushi"]
 IMAGE_SIZE = 224
 IMAGENET_MEAN = [0.485, 0.456, 0.406]
@@ -49,7 +50,7 @@ def build_model(pretrained=True):
     return model
 
 
-def load_model(path=os.path.join(RESULTS_DIR, "efficientnet_best.pt"), device=DEVICE):
+def load_model(path=A1_CHECKPOINT, device=DEVICE):
     model = build_model(pretrained=False)
     model.load_state_dict(torch.load(path, map_location=device))
     return model.to(device).eval()

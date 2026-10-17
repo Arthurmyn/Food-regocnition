@@ -24,7 +24,7 @@ DATASET_PATH = "dataset"
 CLASSES = ["burger", "hotdog", "pizza", "sandwich", "sushi"]
 SUPPORTED_EXTENSIONS = {".jpg", ".jpeg", ".png", ".webp"}
 
-RESULTS_DIR = "results"
+RESULTS_DIR = "results/a1"
 PROBLEMS_DIR = os.path.join(DATASET_PATH, "_problems")
 
 MIN_REASONABLE_DIMENSION = 200

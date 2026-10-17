@@ -7,7 +7,7 @@ from torch.utils.data import DataLoader
 from torchvision import datasets, models, transforms
 from PIL import Image, ImageDraw
 
-RESULTS_DIR = "results"
+RESULTS_DIR = "results/a1"
 SPLIT_DIR = "dataset_split"
 CLASSES = ["burger", "hotdog", "pizza", "sandwich", "sushi"]
 IMAGE_SIZE = 224
@@ -138,7 +138,7 @@ def main():
     }
     with open(os.path.join(RESULTS_DIR, "model_comparison.json"), "w") as f:
         json.dump(comparison, f, indent=2)
-    print("Model comparison written to results/model_comparison.json")
+    print("Model comparison written to results/a1/model_comparison.json")
 
     print("\nLoading EfficientNet model and test set to find misclassified examples...")
     model = load_efficientnet_model()
@@ -172,7 +172,7 @@ def main():
             "total_test_samples": len(test_dataset),
             "confusion_pairs": error_counts,
         }, f, indent=2)
-    print("Error analysis summary written to results/error_analysis.json")
+    print("Error analysis summary written to results/a1/error_analysis.json")
 
 
 if __name__ == "__main__":

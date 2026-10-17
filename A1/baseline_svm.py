@@ -8,7 +8,7 @@ from sklearn.preprocessing import StandardScaler
 from sklearn.metrics import accuracy_score, precision_recall_fscore_support, confusion_matrix, classification_report
 
 SPLIT_DIR = "dataset_split"
-RESULTS_DIR = "results"
+RESULTS_DIR = "results/a1"
 IMAGE_SIZE = 128
 CLASSES = ["burger", "hotdog", "pizza", "sandwich", "sushi"]
 SEED = 42

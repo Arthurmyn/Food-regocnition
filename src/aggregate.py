@@ -1,4 +1,4 @@
-"""Aggregate results/runs/*.json into mean +/- std tables (results/summary.md, summary.json)."""
+"""Aggregate results/a2/runs/*.json into mean +/- std tables (results/a2/summary.md, summary.json)."""
 import glob
 import json
 import os

@@ -10,7 +10,7 @@ from sklearn.metrics import accuracy_score, precision_recall_fscore_support, con
 import matplotlib.pyplot as plt
 
 SPLIT_DIR = "dataset_split"
-RESULTS_DIR = "results"
+RESULTS_DIR = "results/a1"
 CLASSES = ["burger", "hotdog", "pizza", "sandwich", "sushi"]
 IMAGE_SIZE = 224
 

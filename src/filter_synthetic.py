@@ -1,7 +1,7 @@
 """Keep synthetic images that a real-data-only classifier labels as the intended class (conf >= thr).
 
     python filter_synthetic.py --thr 0.5
-Writes synthetic/accepted/<class>/ and results/synthetic_filter.json.
+Writes synthetic/accepted/<class>/ and results/a2/synthetic_filter.json.
 """
 import argparse
 import json
@@ -11,7 +11,7 @@ import shutil
 import torch
 from PIL import Image
 
-from common import CLASSES, DEVICE, RESULTS_DIR, load_model
+from common import A1_CHECKPOINT, CLASSES, DEVICE, RESULTS_DIR, load_model
 from explain import preprocess
 
 
@@ -19,7 +19,7 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--thr", type=float, default=0.5)
     ap.add_argument("--root", default="synthetic")
-    ap.add_argument("--model", default=os.path.join(RESULTS_DIR, "efficientnet_best.pt"))
+    ap.add_argument("--model", default=A1_CHECKPOINT)
     args = ap.parse_args()
     model = load_model(args.model)
     acc_dir = os.path.join(args.root, "accepted")

@@ -7,7 +7,7 @@ from torchvision import datasets, transforms
 from PIL import Image
 
 SPLIT_DIR = "dataset_split"
-RESULTS_DIR = "results"
+RESULTS_DIR = "results/a1"
 IMAGE_SIZE = 224
 
 IMAGENET_MEAN = [0.485, 0.456, 0.406]

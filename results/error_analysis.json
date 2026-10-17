@@ -1,0 +1,13 @@
+{
+  "total_misclassified": 14,
+  "total_test_samples": 79,
+  "confusion_pairs": {
+    "burger -> sandwich": 6,
+    "hotdog -> sandwich": 1,
+    "pizza -> sandwich": 1,
+    "sandwich -> sushi": 1,
+    "sandwich -> burger": 2,
+    "sushi -> pizza": 1,
+    "sushi -> burger": 2
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "svm_test": {
+    "accuracy": 0.5316455696202531,
+    "precision_macro": 0.5286541889483065,
+    "recall_macro": 0.5190826330532213,
+    "f1_macro": 0.5019758672699849
+  },
+  "efficientnet_test": {
+    "accuracy": 0.7974683544303798,
+    "precision_macro": 0.8037330316742082,
+    "recall_macro": 0.8056862745098041,
+    "f1_macro": 0.8013149240887578
+  }
+}

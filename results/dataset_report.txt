@@ -1,0 +1,58 @@
+DATASET SUMMARY REPORT
+========================================
+
+Total images scanned: 535
+Valid images: 535
+Corrupted/invalid images: 0
+
+Images per class:
+  Burger     112
+  Hotdog     98
+  Pizza      103
+  Sandwich   117
+  Sushi      105
+
+Class balance -- min: 98, max: 117, diff: 19
+
+Corrupted images:
+  None
+
+Exact duplicate groups: 0
+
+Possible visually-similar pairs (Hamming distance <= 5): 0
+
+Dimension statistics per class:
+  Burger:
+    Min:     183x159
+    Max:     1280x2276
+    Average: 1040x844
+    Unusual (< 200px on a side): 11
+  Hotdog:
+    Min:     256x256
+    Max:     1280x1707
+    Average: 701x533
+    Unusual (< 200px on a side): 0
+  Pizza:
+    Min:     383x341
+    Max:     1280x2208
+    Average: 940x805
+    Unusual (< 200px on a side): 0
+  Sandwich:
+    Min:     400x266
+    Max:     8192x8160
+    Average: 3375x2702
+    Unusual (< 200px on a side): 0
+  Sushi:
+    Min:     320x240
+    Max:     5760x3840
+    Average: 2797x1927
+    Unusual (< 200px on a side): 0
+
+File format statistics:
+  JPEG: 520
+  PNG: 8
+  MPO: 7
+
+Color mode statistics:
+  RGB: 528
+  RGBA: 7

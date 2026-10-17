@@ -1,0 +1,24 @@
+{
+  "dataset_mean": [
+    0.5845664739608765,
+    0.46563854813575745,
+    0.34892943501472473
+  ],
+  "dataset_std": [
+    0.2539352476596832,
+    0.2529754042625427,
+    0.2629520893096924
+  ],
+  "imagenet_mean": [
+    0.485,
+    0.456,
+    0.406
+  ],
+  "imagenet_std": [
+    0.229,
+    0.224,
+    0.225
+  ],
+  "image_size": 224,
+  "note": "Use dataset_mean/std when training a CNN from scratch (baseline). Use imagenet_mean/std when fine-tuning a pretrained backbone (transfer learning)."
+}

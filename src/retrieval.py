@@ -3,7 +3,7 @@
 Index = L2-normalised 1280-d EfficientNet-B0 features of the real TRAIN images.
 Query = real TEST images. A neighbour is relevant if it has the same class as the query.
 
-    python retrieval.py                     # uses results/efficientnet_best.pt
+    python retrieval.py                     # uses results/a1/efficientnet_best.pt
     python retrieval.py --model path.pt
 """
 import argparse
@@ -14,7 +14,7 @@ import numpy as np
 import torch
 from torchvision import datasets
 
-from common import DEVICE, RESULTS_DIR, SPLIT_DIR, build_model, build_transforms, embed, load_model
+from common import A1_CHECKPOINT, DEVICE, RESULTS_DIR, SPLIT_DIR, build_model, build_transforms, embed, load_model
 
 KS = (1, 5, 10)
 
@@ -40,7 +40,7 @@ def precision_at_k(train_f, train_y, test_f, test_y, ks=KS):
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("--model", default=os.path.join(RESULTS_DIR, "efficientnet_best.pt"))
+    ap.add_argument("--model", default=A1_CHECKPOINT)
     ap.add_argument("--index-out", default=os.path.join(RESULTS_DIR, "index.npz"))
     args = ap.parse_args()
 

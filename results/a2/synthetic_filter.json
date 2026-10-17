@@ -1,0 +1,48 @@
+{
+ "burger": {
+  "generated": 40,
+  "accepted": 37,
+  "rejected_as": {
+   "sandwich": 1,
+   "burger": 1,
+   "pizza": 1
+  }
+ },
+ "hotdog": {
+  "generated": 40,
+  "accepted": 15,
+  "rejected_as": {
+   "sushi": 14,
+   "hotdog": 6,
+   "sandwich": 3,
+   "burger": 2
+  }
+ },
+ "pizza": {
+  "generated": 40,
+  "accepted": 36,
+  "rejected_as": {
+   "sushi": 2,
+   "pizza": 2
+  }
+ },
+ "sandwich": {
+  "generated": 40,
+  "accepted": 15,
+  "rejected_as": {
+   "pizza": 1,
+   "sandwich": 5,
+   "sushi": 10,
+   "burger": 5,
+   "hotdog": 4
+  }
+ },
+ "sushi": {
+  "generated": 40,
+  "accepted": 36,
+  "rejected_as": {
+   "sandwich": 1,
+   "sushi": 3
+  }
+ }
+}

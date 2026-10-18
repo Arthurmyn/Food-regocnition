@@ -93,6 +93,8 @@ li.top .fl-fill{background:var(--ok);opacity:1}
 .fl-stat div:first-child{border-top:0}
 .stButton>button,.stApp [data-testid="stBaseButton-secondary"]{border-radius:4px;border:1px solid var(--line);
   background:var(--card);color:var(--ink)}
+.stApp [data-testid="stBaseButton-primary"] *{color:#fff!important}
+.stApp [data-testid="stBaseButton-primary"]{background:var(--accent)!important;border-color:var(--accent)!important;color:#fff!important;font-weight:600}
 .stApp [data-testid="stPageLink"] a{border-radius:4px}
 .stApp [data-testid="stPageLink"] a p{font-size:14px}
 @media (max-width:760px){

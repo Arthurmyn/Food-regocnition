@@ -3,7 +3,7 @@
 Index = L2-normalised 1280-d EfficientNet-B0 features of the real TRAIN images.
 Query = real TEST images. A neighbour is relevant if it has the same class as the query.
 
-    python retrieval.py                     # uses results/a1/efficientnet_best.pt
+    python retrieval.py                     # deployed model = frozen ImageNet backbone + linear head
     python retrieval.py --model path.pt
 """
 import argparse
@@ -14,7 +14,7 @@ import numpy as np
 import torch
 from torchvision import datasets
 
-from common import A1_CHECKPOINT, DEVICE, RESULTS_DIR, SPLIT_DIR, build_model, build_transforms, embed, load_model
+from common import A1_CHECKPOINT, DEPLOY_CHECKPOINT, DEVICE, RESULTS_DIR, SPLIT_DIR, build_model, build_transforms, embed, load_model
 
 KS = (1, 5, 10)
 
@@ -40,18 +40,18 @@ def precision_at_k(train_f, train_y, test_f, test_y, ks=KS):
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("--model", default=A1_CHECKPOINT)
+    ap.add_argument("--model", default=DEPLOY_CHECKPOINT)
     ap.add_argument("--index-out", default=os.path.join(RESULTS_DIR, "index.npz"))
     args = ap.parse_args()
 
     out = {}
-    for name, model in [("imagenet_frozen", build_model(pretrained=True).to(DEVICE).eval()),
-                        ("a1_finetuned", load_model(args.model))]:
+    for name, model in [("a1_finetuned", load_model(A1_CHECKPOINT)),
+                        ("deployed_frozen_probe", load_model(args.model))]:
         tr_f, tr_y, tr_p = embed_folder(model, os.path.join(SPLIT_DIR, "train"))
         te_f, te_y, _ = embed_folder(model, os.path.join(SPLIT_DIR, "test"))
         out[name] = precision_at_k(tr_f, tr_y, te_f, te_y)
         print(name, out[name])
-        if name == "a1_finetuned":
+        if name == "deployed_frozen_probe":
             np.savez(args.index_out, feats=tr_f, labels=tr_y, paths=np.array(tr_p))
     json.dump(out, open(os.path.join(RESULTS_DIR, "retrieval.json"), "w"), indent=1)
 

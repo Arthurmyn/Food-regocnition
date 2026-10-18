@@ -1,6 +1,6 @@
 """Binary hotdog-vs-rest evaluation of the 5-class model (used by the joke app), real test set.
 
-Rule used in the app: "Hotdog" iff P(hotdog) >= 0.5. Also probes a few non-photo inputs.
+Rule used in the app: "Hotdog" iff P(hotdog) >= 0.4 (chosen on validation). Also probes a few non-photo inputs.
 Writes results/a2/hotdog_binary.json.
 """
 import json
@@ -10,11 +10,11 @@ import numpy as np
 import torch
 from PIL import Image, ImageDraw
 
-from common import CLASSES, DEVICE, RESULTS_DIR, SPLIT_DIR, load_model
+from common import CLASSES, DEPLOY_CHECKPOINT, DEVICE, RESULTS_DIR, SPLIT_DIR, load_model
 from explain import preprocess
 
 H = CLASSES.index("hotdog")
-model = load_model()
+model = load_model(DEPLOY_CHECKPOINT)
 
 
 def p_hotdog(img):

@@ -10,7 +10,7 @@ from PIL import Image, ImageOps
 
 sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "src"))
 
-from common import CLASSES, DEPLOY_CHECKPOINT, DEVICE, embed, load_model  # noqa: E402
+from common import CLASSES, DEPLOY_CHECKPOINT, DEVICE, RESULTS_DIR, embed, load_model  # noqa: E402
 from explain import gradcam_overlay, preprocess  # noqa: E402,F401
 
 MODEL_PATH = DEPLOY_CHECKPOINT

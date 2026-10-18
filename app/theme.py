@@ -19,6 +19,15 @@ DARK = """
   --ok:#5BC48B;--ok-soft:#183A2A;--syn:#E56BAA;--syn-soft:#3A1B2C;--track:#26322C}
 .stApp{background:var(--bg)!important}
 header[data-testid="stHeader"]{background:transparent!important}
+[data-testid="stCameraInputWebcamStyledBox"],[data-testid="stCameraInput"] > div{background:var(--card)!important;
+  border:1px solid var(--line);border-radius:6px;color:var(--ink)}
+[data-testid="stCameraInput"] button{background:var(--accent)!important;color:#1A1300!important;border:0;
+  font-weight:600}
+[data-testid="stCameraInputWebcamComponent"] div{background:transparent!important}
+[data-testid="stCameraInput"] a{color:var(--accent)!important}
+[data-testid="stCameraInput"] svg{fill:var(--muted)!important}
+[data-testid="stExpander"] details{border:1px solid var(--line);background:var(--card);border-radius:4px}
+[data-testid="stFileUploaderDropzone"]{background:var(--card)!important}
 """
 
 BASE = """

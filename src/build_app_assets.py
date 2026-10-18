@@ -1,8 +1,8 @@
 """Small image copies for the deployed app (the full dataset is not in git).
 
- - app/assets/train/<class>/<file>.jpg    : 256px thumbnails of every real train image (kNN gallery)
- - app/assets/synthetic/<class>/<file>.jpg: 6 accepted synthetic samples per class
-(app/assets/example.jpg is a separate, hand-picked real test photo and is left untouched.)
+ - web/assets/train/<class>/<file>.jpg    : 256px thumbnails of every real train image (kNN gallery)
+ - web/assets/synthetic/<class>/<file>.jpg: 6 accepted synthetic samples per class
+(web/assets/example.jpg is a separate, hand-picked real test photo and is left untouched.)
 """
 import os
 import shutil
@@ -11,7 +11,7 @@ from PIL import Image
 
 from common import CLASSES, SPLIT_DIR
 
-OUT = os.path.join("app", "assets")
+OUT = os.path.join("web", "assets")
 for sub in ("train", "synthetic"):
     shutil.rmtree(os.path.join(OUT, sub), ignore_errors=True)
 

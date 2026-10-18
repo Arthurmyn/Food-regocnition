@@ -6,7 +6,7 @@ RUN pip install --no-cache-dir --extra-index-url https://download.pytorch.org/wh
 COPY server server
 COPY src src
 COPY web web
-COPY results/a1/efficientnet_best.pt results/a1/efficientnet_best.pt
+COPY results/a2/linear_probe.pt results/a2/linear_probe.pt
 COPY results/a2/index.npz results/a2/synthetic_filter.json results/a2/
 RUN useradd -m app && chown -R app /app
 USER app

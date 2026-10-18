@@ -13,15 +13,15 @@ from PIL import Image
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, os.path.join(ROOT, "src"))
 
-from common import A1_CHECKPOINT, CLASSES, DEVICE, embed, load_model  # noqa: E402
+from common import CLASSES, DEVICE, DEPLOY_CHECKPOINT, embed, load_model  # noqa: E402
 from explain import gradcam_overlay, preprocess  # noqa: E402
 
-MODEL_NAME = "EfficientNet-B0"
+MODEL_NAME = "EfficientNet-B0 (frozen ImageNet features + linear head)"
 INDEX_PATH = os.path.join(ROOT, "results", "a2", "index.npz")
 HOTDOG = CLASSES.index("hotdog")
 
 _lock = threading.Lock()  # one forward pass at a time (MPS/CPU safety, stable latency numbers)
-_model = load_model(A1_CHECKPOINT)
+_model = load_model(DEPLOY_CHECKPOINT)
 _idx = np.load(INDEX_PATH, allow_pickle=True)
 _feats, _labels, _paths = _idx["feats"], _idx["labels"], _idx["paths"]
 

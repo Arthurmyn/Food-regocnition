@@ -10,7 +10,9 @@ from torchvision import datasets, models, transforms
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SPLIT_DIR = os.path.join(ROOT, "dataset_split")
 RESULTS_DIR = os.path.join(ROOT, "results", "a2")
-A1_CHECKPOINT = os.path.join(ROOT, "results", "a1", "efficientnet_best.pt")  # A1 EfficientNet-B0 (79.7% test acc)
+A1_CHECKPOINT = os.path.join(ROOT, "results", "a1", "efficientnet_best.pt")  # A1 EfficientNet-B0, fine-tuned (79.7% test acc)
+# deployed model: frozen ImageNet EfficientNet-B0 + linear head (src/train_linear_probe.py)
+DEPLOY_CHECKPOINT = os.path.join(ROOT, "results", "a2", "linear_probe.pt")
 CLASSES = ["burger", "hotdog", "pizza", "sandwich", "sushi"]
 IMAGE_SIZE = 224
 IMAGENET_MEAN = [0.485, 0.456, 0.406]

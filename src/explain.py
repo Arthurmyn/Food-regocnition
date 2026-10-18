@@ -2,7 +2,7 @@
 import numpy as np
 import torch
 import torch.nn.functional as F
-from PIL import Image
+from PIL import Image, ImageOps
 from matplotlib import colormaps
 
 from common import build_transforms
@@ -10,12 +10,12 @@ from common import build_transforms
 
 def preprocess(pil_img):
     _, tf = build_transforms(augment=False)
-    return tf(pil_img.convert("RGB")).unsqueeze(0)
+    return tf(ImageOps.exif_transpose(pil_img).convert("RGB")).unsqueeze(0)
 
 
 def center_crop_rgb(pil_img, size=224):
     """The exact 224x224 crop the model sees, as float RGB in [0,1] (for overlay)."""
-    img = pil_img.convert("RGB")
+    img = ImageOps.exif_transpose(pil_img).convert("RGB")
     w, h = img.size
     s = 256 / min(w, h)
     img = img.resize((round(w * s), round(h * s)), Image.BILINEAR)

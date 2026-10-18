@@ -5,3 +5,4 @@ synthetic/
 __pycache__/
 .DS_Store
 *.ipynb_checkpoints
+space_build/

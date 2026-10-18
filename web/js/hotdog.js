@@ -2,7 +2,7 @@
 import { header, startCamera, stopCamera, snap, predict, explain, bars, neighbors, footer, esc, cap } from "./common.js";
 
 header("hotdog");
-const THRESHOLD = 0.5;      // P(hotdog) needed for a green check; anything else is "Not hotdog"
+const THRESHOLD = 0.4;      // P(hotdog) needed for a green check (validation F1 is flat for 0.35-0.5)
 const MIN_EVALUATING_MS = 1200;
 const $ = (id) => document.getElementById(id);
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));

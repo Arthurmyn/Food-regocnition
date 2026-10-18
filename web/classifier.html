@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Classifier · Food Lens</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap">
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <div id="header"></div>
+  <main class="wrap">
+    <h1 class="page-title">Classify a food image</h1>
+    <p class="page-sub">Upload a photo to identify burger, hotdog, pizza, sandwich, or sushi.</p>
+
+    <div class="cols">
+      <section>
+        <div class="drop" id="drop">
+          <p>Drop an image here or <b>browse files</b></p>
+          <label class="btn">Browse files<input id="file" type="file" accept="image/jpeg,image/png,image/webp" hidden></label>
+          <button class="btn" id="camBtn" type="button">Use camera</button>
+        </div>
+        <div class="live" id="live" hidden>
+          <video id="cam" autoplay playsinline muted></video>
+          <button id="shutter" class="shutter" aria-label="Take photo"></button>
+        </div>
+        <p class="note" id="camErr" hidden></p>
+        <div class="card" style="margin-top:14px">
+          <div style="position:relative"><img id="preview" class="img" style="aspect-ratio:4/3" alt="Image being classified">
+            <span class="tag" id="name">example.jpg</span></div>
+          <div class="foot">Accepted: JPG, PNG, WEBP · the first image is a real test-set photo shown as an example</div>
+        </div>
+      </section>
+
+      <section class="card" id="result"><div class="pad"><p class="note">Loading…</p></div></section>
+    </div>
+
+    <div class="sec"><h2>Closest training examples</h2><span>Nearest neighbours by cosine similarity in embedding space</span></div>
+    <div class="grid5" id="near"></div>
+  </main>
+  <script type="module" src="/js/classifier.js"></script>
+</body>
+</html>

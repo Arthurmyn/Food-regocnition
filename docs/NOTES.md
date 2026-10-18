@@ -95,25 +95,32 @@ A1 code in `a1/`, A1 results in `results/a1/`. How to run: `README.md`.
 
 ## 6. Web app ("Food Lens"): two services in one
 
-Layout follows a Lovable mock-up supplied by the author (static React mock with a fake classifier; only the
-layout was reused); fonts (Schibsted Grotesk, JetBrains Mono) and colours are our own. Built with Streamlit.
+Stack: FastAPI (`server/`) serves the model API and the static frontend in `web/` (plain HTML/CSS/JS,
+no framework, no build step). The layout follows a Lovable mock-up supplied by the author (static React mock with
+a fake classifier; only the layout was reused); fonts (Schibsted Grotesk, JetBrains Mono) and colours are our own.
+API: `POST /api/predict` (class probabilities, mean latency of 10 warm runs, device, 5 nearest training photos),
+`POST /api/explain` (Grad-CAM overlay for a class), `GET /api/synthetic` (counts + samples).
 
-- **Hot Dog or Not** (joke service, default page, dark): opens straight on the camera. Photo ->
-  "Evaluating..." spinner -> green "Hotdog" / red "Not hotdog" banner. Buttons: "Take another photo",
-  "Additional information" (verdict, probabilities, Grad-CAM for hotdog, 5 nearest training photos,
-  latency + device). Fallback: upload instead of camera. Own artwork; inspired by the gag in the TV show
-  Silicon Valley (credit it, no logos).
-- **Classifier** (the real service): upload or camera -> Top-1 class + probability bars, Grad-CAM, nearest
-  training examples, latency. The page opens with `example.jpg`, a real TEST photo (the most confident
+- **Hot Dog or Not** (joke service, home page, dark): the camera opens as soon as the page loads. Shutter ->
+  "Evaluating..." spinner (at least 1.2 s) -> green "Hotdog" / red "Not hotdog" banner. Buttons: "Take another
+  photo", "Additional information" (verdict, probabilities, Grad-CAM for hotdog, 5 nearest training photos,
+  latency + device). Fallback: upload a photo if the camera is unavailable. Own artwork; inspired by the gag in
+  the TV show Silicon Valley (credit it, no logos).
+- **Classifier** (the real service): upload / drag-and-drop / camera -> Top-1 class + probability bars, Grad-CAM,
+  nearest training examples, latency. The page opens with `example.jpg`, a real TEST photo (the most confident
   correct pizza), picked by hand, so say it is an illustrative example, not a typical one.
 - **Synthetic Data**: SYNTHETIC MEDIA banner, real counts (200 generated, 139 accepted), 6 samples per class.
-- Joke rule: "Hotdog" iff P(hotdog) >= 0.5 (`HOTDOG_THRESHOLD` in `app/views/hotdog.py`). Anything else,
-  including non-food, is "Not hotdog".
+- Joke rule: "Hotdog" iff P(hotdog) >= 0.5 (`THRESHOLD` in `web/js/hotdog.js`). Anything else, including
+  non-food, is "Not hotdog".
+- Tested end to end in headless Chrome with a fake camera feed (a real hotdog photo -> green, a real pizza
+  photo -> red, "Take another photo" restarts the camera, classifier camera path, phone viewport).
+  Not tested: a real phone camera, Docker build, a deployed instance.
 - Hotdog-vs-rest on the real test set (79 images, 14 hotdogs), `src/hotdog_eval.py`, thr 0.5:
   precision 1.00, recall 0.93 (13/14), accuracy 0.99. Thr 0.4: precision 0.88, recall 1.00.
   Tiny test set, so treat as indicative.
 - Non-photo probes (noise, flat colours, gradient, text): P(hotdog) 0.11-0.21, all "Not hotdog".
   Real non-food objects (shoe, cup, person) were NOT tested; the model never saw them, so it can
   still be confidently wrong on them. Say so in the report.
-- Privacy: the nearest-neighbour gallery shows training photos; at least one training photo shows an
-  identifiable person. Review/remove such photos before sharing the repo or app publicly.
+- Privacy: photos are sent to the server for inference and not stored. The nearest-neighbour gallery shows
+  training photos; at least one training photo shows an identifiable person. Review/remove such photos
+  before sharing the repo or app publicly.

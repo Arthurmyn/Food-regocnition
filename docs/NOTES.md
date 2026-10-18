@@ -95,7 +95,7 @@ A1 code in `a1/`, A1 results in `results/a1/`. How to run: `README.md`.
 
 ## 6. Web app ("Food Lens"): two services in one
 
-Stack: FastAPI (`server/`) serves the model API and the static frontend in `web/` (plain HTML/CSS/JS,
+There are two frontends on the same model. Public link: Streamlit (`app/`, runs on Streamlit Cloud). Alternative: FastAPI (`server/`) serves the model API and the static frontend in `web/` (plain HTML/CSS/JS,
 no framework, no build step). The layout follows a Lovable mock-up supplied by the author (static React mock with
 a fake classifier; only the layout was reused); fonts (Schibsted Grotesk, JetBrains Mono) and colours are our own.
 API: `POST /api/predict` (class probabilities, mean latency of 10 warm runs, device, 5 nearest training photos),

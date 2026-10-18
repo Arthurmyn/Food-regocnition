@@ -9,6 +9,7 @@ a1/          A1 scripts (dataset check, split, preprocessing, SVM, EfficientNet,
              notebook and report. Run from the repo root, e.g. python3 a1/split_dataset.py
 src/         A2 code: train, generate_synthetic, filter_synthetic, retrieval, explain,
              aggregate, make_figures, hotdog_eval, build_app_assets, common
+app/         Streamlit frontend (this is what Streamlit Cloud runs: main file app/app.py)
 server/      FastAPI app: /api/predict, /api/explain, /api/synthetic + serves web/
 web/         Frontend, plain HTML/CSS/JS (no build step): index.html (Hot Dog or Not),
              classifier.html, synthetic.html, css/, js/, assets/ (thumbnails, synthetic samples)
@@ -16,7 +17,7 @@ scripts/     run_baselines.sh, run_ablation.sh
 docs/        NOTES.md (numbers and caveats for the report), DEPLOY.md
 results/a1/  A1 outputs, incl. the checkpoint efficientnet_best.pt
 results/a2/  A2 outputs: runs/*.json, summary.md, retrieval.json, index.npz, figures
-Dockerfile   container for deployment (CPU PyTorch, port 7860)
+Dockerfile   container for the FastAPI version (CPU PyTorch, port 7860)
 dataset/, dataset_split/, synthetic/   images, git-ignored
 ```
 
@@ -31,7 +32,7 @@ A1 (HOG+SVM baseline and EfficientNet-B0) lives in `a1/`. A2 adds:
 | Classifier-based filtering of synthetic images | `src/filter_synthetic.py` |
 | Retrieval index + precision@k | `src/retrieval.py` |
 | Grad-CAM (pure PyTorch) | `src/explain.py` |
-| Web app "Food Lens" (FastAPI API + plain HTML/CSS/JS frontend): "Hot Dog or Not" (joke, opens on the camera, home page), the real classifier (Grad-CAM, nearest neighbours, latency) and a synthetic-images page | `server/`, `web/` |
+| Web app "Food Lens" (FastAPI API + plain HTML/CSS/JS frontend): "Hot Dog or Not" (joke, opens on the camera, home page), the real classifier (Grad-CAM, nearest neighbours, latency) and a synthetic-images page | `app/` (Streamlit) or `server/` + `web/` (FastAPI + HTML) |
 | Hotdog-vs-rest check for the joke service (precision/recall at the 0.5 rule) | `src/hotdog_eval.py` |
 | Tables (mean ± std over seeds) | `src/aggregate.py` -> `results/a2/summary.md` |
 
@@ -48,12 +49,13 @@ python3 src/filter_synthetic.py --thr 0.5
 python3 src/retrieval.py                           # P@k + results/a2/index.npz
 python3 src/aggregate.py
 python3 src/make_figures.py
-uvicorn server.main:app --port 8000      # then open http://localhost:8000
+streamlit run app/app.py                 # Streamlit version, or:
+uvicorn server.main:app --port 8000      # FastAPI + HTML version, then open http://localhost:8000
 ```
 
 `results/a1/efficientnet_best.pt` is the A1 checkpoint (79.7% test accuracy, reproduced).
 The app serves the A1 checkpoint. The retrieval index (`results/a2/index.npz`) is built from it.
-The camera needs HTTPS or `localhost`. Deployment: `docs/DEPLOY.md`.
+The camera needs HTTPS or `localhost`. Deployment (Streamlit Cloud, other hosts): `docs/DEPLOY.md`.
 
 ## Synthetic media and ethics
 

@@ -97,7 +97,16 @@ li.top .fl-fill{background:var(--ok);opacity:1}
 .stApp [data-testid="stBaseButton-primary"]{background:var(--accent)!important;border-color:var(--accent)!important;color:#fff!important;font-weight:600}
 .stApp [data-testid="stPageLink"] a{border-radius:4px}
 .stApp [data-testid="stPageLink"] a p{font-size:14px}
+/* keep the header on ONE row on phones (Streamlit stacks columns by default) */
+.st-key-fl-header [data-testid="stHorizontalBlock"]{flex-wrap:nowrap!important;gap:.15rem!important}
+.st-key-fl-header [data-testid="stColumn"]{min-width:0!important;width:auto!important;flex:1 1 auto!important}
 @media (max-width:760px){
+  .block-container{padding:3.6rem .9rem 2rem!important}
+  .st-key-fl-header .fl-brand span,.st-key-fl-header .fl-brand{font-size:0}
+  .st-key-fl-header .fl-brand .fl-dot{width:16px;height:16px}
+  .st-key-fl-header [data-testid="stPageLink"] a{padding:.25rem .35rem}
+  .st-key-fl-header [data-testid="stPageLink"] a p{font-size:12px;white-space:nowrap}
+  .fl-rule{margin:.2rem 0 .8rem}
   .fl-grid{grid-template-columns:repeat(2,1fr)}.fl-syn-grid{grid-template-columns:repeat(3,1fr)}
   .fl-pill{display:none}
 }
@@ -110,13 +119,14 @@ def apply(dark=False):
 
 def header(pages):
     """Brand on the left, page links in the middle, model pill on the right."""
-    a, b, c = st.columns([2.2, 5, 3], vertical_alignment="center")
-    a.html('<span class="fl-brand"><i class="fl-dot"></i>Food Lens</span>')
-    with b:
-        links = st.columns(len(pages))
-        for col, page in zip(links, pages):
-            col.page_link(page, label=page.title)
-    c.html('<span class="fl-pill mono"><i></i>EfficientNet-B0 · Local model</span>')
+    with st.container(key="fl-header"):
+        a, b, c = st.columns([2.2, 5, 3], vertical_alignment="center")
+        a.html('<span class="fl-brand"><i class="fl-dot"></i>Food Lens</span>')
+        with b:
+            links = st.columns(len(pages))
+            for col, page in zip(links, pages):
+                col.page_link(page, label=page.title)
+        c.html('<span class="fl-pill mono"><i></i>EfficientNet-B0 · Local model</span>')
     st.html('<hr class="fl-rule">')
 
 

@@ -1,0 +1,9 @@
+dataset
+dataset_split
+synthetic
+a1
+docs
+scripts
+results/a2/runs
+.git
+**/__pycache__

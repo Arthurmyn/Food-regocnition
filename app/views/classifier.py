@@ -1,4 +1,4 @@
-"""Service 2 (real one): food classifier with Grad-CAM, nearest neighbours and latency."""
+# Service 2 (real one): food classifier with Grad-CAM, nearest neighbours and latency.
 import streamlit as st
 from PIL import Image
 

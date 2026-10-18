@@ -1,29 +1,57 @@
-# Service 2 (real one): food classifier with Grad-CAM, nearest neighbours and latency.
+# Service 2 (the real one): food classifier with Grad-CAM, nearest neighbours and latency.
+import io
+import os
+
 import streamlit as st
 from PIL import Image
 
-from core import CLASSES, DEVICE, gradcam_overlay, get_model, nearest, predict, thumb
+import theme
+from core import ASSETS, CLASSES, DEVICE, gradcam_overlay, get_model, nearest, predict, thumb
 
-st.title("Food classifier")
-st.caption("burger / hotdog / pizza / sandwich / sushi, EfficientNet-B0 trained on 375 real photos.")
+theme.apply()
 
-c1, c2 = st.columns(2)
-up = c1.file_uploader("Upload a food photo", type=["jpg", "jpeg", "png", "webp"])
-cam = c2.camera_input("...or take a photo")
-src = up or cam
+st.html('<h1 style="margin:0;font-size:28px">Classify a food image</h1>'
+        '<p style="color:var(--muted);margin:.2rem 0 1.4rem">Upload a photo to identify burger, hotdog, '
+        'pizza, sandwich, or sushi.</p>')
+
+left, right = st.columns([7, 5], gap="large")
+
+with left:
+    up = st.file_uploader("Drop an image here or browse files", type=["jpg", "jpeg", "png", "webp"])
+    with st.expander("Use camera"):
+        cam = st.camera_input("Take a photo", label_visibility="collapsed")
+    src = up or cam
+
 if src is not None:
-    img = Image.open(src).convert("RGB")
-    probs, q, ms = predict(img)
-    pred = int(probs.argmax())
+    img, name = Image.open(src).convert("RGB"), getattr(src, "name", "camera.jpg")
+else:  # example: a real test-set photo (never seen in training)
+    img, name = Image.open(os.path.join(ASSETS, "example.jpg")).convert("RGB"), "example.jpg"
 
-    st.header(f"Prediction: {CLASSES[pred]} ({probs[pred]:.0%})")
-    st.caption(f"Average inference time: {ms:.1f} ms on {DEVICE}")
-    a, b, c = st.columns(3)
-    a.image(img, caption="Input", width="stretch")
-    b.image(gradcam_overlay(get_model(), img, pred)[0], caption=f"Grad-CAM for '{CLASSES[pred]}'",
-            width="stretch")
-    c.bar_chart({k: float(v) for k, v in zip(CLASSES, probs)})
+probs, q, ms = predict(img)
+top = int(probs.argmax())
+cam_img = Image.fromarray(gradcam_overlay(get_model(), img, top)[0])
 
-    st.subheader("Nearest training images (cosine similarity in feature space)")
-    for col, (path, label, sim) in zip(st.columns(5), nearest(q)):
-        col.image(thumb(path, label), caption=f"{CLASSES[label]}  {sim:.2f}", width="stretch")
+with left:
+    st.html(f'<div class="fl-card" style="margin-top:1rem"><div style="position:relative">'
+            f'{theme.img_tag(img, style="aspect-ratio:4/3")}'
+            f'<span class="fl-tag mono" style="position:absolute;left:12px;top:12px">{name}</span></div>'
+            f'<div class="fl-foot">Accepted: JPG, PNG, WEBP</div></div>')
+
+with right:
+    st.html(f"""<div class="fl-card">
+      <div class="fl-pad"><p class="fl-eyebrow">Prediction</p>
+        <div class="fl-pred"><b>{CLASSES[top].capitalize()}</b><span class="fl-pct">{probs[top]:.0%}</span></div>
+        {theme.prob_bars(CLASSES, probs, top)}</div>
+      <div class="fl-sep fl-pad"><p class="fl-eyebrow">Grad-CAM</p>
+        {theme.img_tag(cam_img, style="aspect-ratio:1;border-radius:3px")}
+        <p style="color:var(--muted);font-size:14px;margin:.6rem 0 0">Warm regions pushed the score
+        for <b>{CLASSES[top]}</b> up; cool regions barely mattered.</p></div>
+      {theme.footer(DEVICE, ms)}</div>""")
+
+near = "".join(
+    f'<figure>{theme.img_tag(Image.open(thumb(p, l)), max_side=256)}'
+    f'<figcaption><span>{CLASSES[l].capitalize()}</span><span>{s:.2f}</span></figcaption></figure>'
+    for p, l, s in nearest(q))
+st.html(f'<div class="fl-sec"><h2>Closest training examples</h2>'
+        f'<span>Nearest neighbours by cosine similarity in embedding space</span></div>'
+        f'<div class="fl-grid">{near}</div>')

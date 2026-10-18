@@ -6,6 +6,7 @@ import streamlit as st
 from PIL import Image
 
 import theme
+from rear_camera import rear_camera
 from core import ASSETS, CLASSES, DEVICE, gradcam_overlay, get_model, load_image, nearest, predict, thumb
 
 theme.apply()
@@ -18,9 +19,8 @@ left, right = st.columns([7, 5], gap="large")
 
 with left:
     up = st.file_uploader("Drop an image here or browse files", type=["jpg", "jpeg", "png", "webp"])
-    with st.expander("Use camera"):
-        cam = st.camera_input("Take a photo", label_visibility="collapsed")
-    src = up or cam
+    cam = rear_camera(key="cls_cam") if st.toggle("Use camera") else None  # only mounted when switched on
+    src = up or (io.BytesIO(cam) if cam else None)
 
 if src is not None:
     img, name = load_image(src), getattr(src, "name", "camera.jpg")

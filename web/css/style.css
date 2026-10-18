@@ -1,7 +1,8 @@
 /* Food Lens: layout from the supplied mock-up; fonts and colours are our own. */
 :root{
-  --bg:#EEF0EA;--card:#FBFBF8;--ink:#16201B;--muted:#5E6A63;--line:#D3D9CF;--accent:#C98F00;--accent-ink:#1A1300;
-  --ok:#1E6B47;--ok-soft:#D9EEE2;--syn:#B02672;--syn-soft:#F8E3EF;--track:#DFE4DA;
+  --bg:#FAF7F2;--card:#FFFFFF;--ink:#1C1917;--muted:#6B645C;--line:#E7E0D6;--accent:#D62828;--accent-ink:#FFFFFF;
+  --accent2:#F7B500;
+  --ok:#2E9E4F;--ok-soft:#E3F4E8;--syn:#B02672;--syn-soft:#F8E3EF;--track:#EFE9DF;
   --sans:'Schibsted Grotesk',system-ui,sans-serif;--mono:'JetBrains Mono',ui-monospace,monospace;
 }
 body.dark{
@@ -23,7 +24,7 @@ a{color:inherit}
 .head{max-width:1100px;margin:0 auto;padding:18px 20px 0}
 .head-row{display:flex;align-items:center;gap:28px;flex-wrap:wrap;padding-bottom:14px;border-bottom:1px solid var(--line)}
 .brand{display:flex;align-items:center;gap:8px;font-weight:700;font-size:17px;text-decoration:none}
-.brand i{width:13px;height:13px;border-radius:3px;background:var(--accent);display:inline-block}
+.brand i{width:13px;height:13px;border-radius:3px;background:var(--accent2);display:inline-block}
 .nav{display:flex;gap:4px;flex-wrap:wrap}
 .nav a{padding:6px 12px;border-radius:4px;text-decoration:none;font-size:14px;color:var(--muted)}
 .nav a:hover{color:var(--ink)}

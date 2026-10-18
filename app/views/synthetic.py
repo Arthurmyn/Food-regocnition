@@ -1,4 +1,4 @@
-"""Synthetic training images (clearly labelled)."""
+# Synthetic training images (clearly labelled).
 import os
 
 import streamlit as st

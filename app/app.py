@@ -1,7 +1,6 @@
-"""Two services in one web app: a joke one (Hotdog or Not) and the real food classifier.
-
-    streamlit run app/app.py
-"""
+# Two services in one web app: a joke one (Hotdog or Not) and the real food classifier.
+#
+#     streamlit run app/app.py
 import os
 import platform
 import sys

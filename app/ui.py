@@ -10,7 +10,7 @@ CSS = """
 .hd-phone{width:100%;max-width:380px;margin:0 auto;border:10px solid #111;border-radius:38px;
   background:#111;box-shadow:0 10px 30px rgba(0,0,0,.35);overflow:hidden}
 .hd-screen{position:relative;height:540px;background:#222;overflow:hidden;border-radius:26px}
-.hd-screen img{width:100%;height:100%;object-fit:cover;display:block}
+.hd-screen img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
 .hd-dim img{filter:brightness(.45) saturate(.7)}
 .hd-empty{display:flex;align-items:center;justify-content:center;flex-direction:column;
   height:100%;color:#fff;font:700 22px/1.3 system-ui,sans-serif;text-align:center;padding:0 24px}

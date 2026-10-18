@@ -6,14 +6,14 @@ import time
 import numpy as np
 import streamlit as st
 import torch
+from PIL import Image, ImageOps
 
 sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "src"))
 
-from common import A1_CHECKPOINT, CLASSES, DEVICE, RESULTS_DIR, embed, load_model  # noqa: E402
+from common import CLASSES, DEPLOY_CHECKPOINT, DEVICE, embed, load_model  # noqa: E402
 from explain import gradcam_overlay, preprocess  # noqa: E402,F401
 
-APP_MODEL = os.path.join(RESULTS_DIR, "app_model.pt")
-MODEL_PATH = APP_MODEL if os.path.exists(APP_MODEL) else A1_CHECKPOINT
+MODEL_PATH = DEPLOY_CHECKPOINT
 INDEX_PATH = os.path.join(RESULTS_DIR, "index.npz")
 # images are shared with the plain-HTML frontend
 ASSETS = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "web", "assets")
@@ -60,3 +60,8 @@ def nearest(q, k=5):
     feats, labels, paths = get_index()
     sims = feats @ q
     return [(paths[i], int(labels[i]), float(sims[i])) for i in np.argsort(-sims)[:k]]
+
+
+def load_image(file):
+    """Open an upload/camera file as RGB with the EXIF orientation applied (phone photos are stored rotated)."""
+    return ImageOps.exif_transpose(Image.open(file)).convert("RGB")

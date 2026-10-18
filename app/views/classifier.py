@@ -6,7 +6,7 @@ import streamlit as st
 from PIL import Image
 
 import theme
-from core import ASSETS, CLASSES, DEVICE, gradcam_overlay, get_model, nearest, predict, thumb
+from core import ASSETS, CLASSES, DEVICE, gradcam_overlay, get_model, load_image, nearest, predict, thumb
 
 theme.apply()
 
@@ -23,9 +23,9 @@ with left:
     src = up or cam
 
 if src is not None:
-    img, name = Image.open(src).convert("RGB"), getattr(src, "name", "camera.jpg")
+    img, name = load_image(src), getattr(src, "name", "camera.jpg")
 else:  # example: a real test-set photo (never seen in training)
-    img, name = Image.open(os.path.join(ASSETS, "example.jpg")).convert("RGB"), "example.jpg"
+    img, name = load_image(os.path.join(ASSETS, "example.jpg")), "example.jpg"
 
 probs, q, ms = predict(img)
 top = int(probs.argmax())

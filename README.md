@@ -63,7 +63,8 @@ The camera needs HTTPS or `localhost`. Deployment: `docs/DEPLOY.md`.
 - The assigned methods (TA-TiTok + MaskGen, ArtAug) were not available as runnable public
   weights for this project; SD-Turbo is a substitute with the same role (tail/hard-case data
   synthesis). See the report.
-- Some real images come from the web (see the A1 report, section 2.3). No people are depicted.
+- Some real images come from the web (see the A1 report, section 2.3). At least one training photo shows an
+  identifiable person (it can appear in the nearest-neighbour gallery); review the photos before publishing.
 - "Hot Dog or Not" is a joke service inspired by the Silicon Valley TV show gag. It reuses the
   5-class model and is unreliable for out-of-distribution inputs (shoes, bananas...).
-- Uploaded images are processed in memory and not stored.
+- Uploaded photos are sent to the server for inference, processed in memory and not stored.

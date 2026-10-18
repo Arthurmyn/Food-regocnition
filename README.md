@@ -28,7 +28,8 @@ A1 (HOG+SVM baseline and EfficientNet-B0) lives in `a1/`. A2 adds:
 | Classifier-based filtering of synthetic images | `src/filter_synthetic.py` |
 | Retrieval index + precision@k | `src/retrieval.py` |
 | Grad-CAM (pure PyTorch) | `src/explain.py` |
-| Demo app (Streamlit): predict, Grad-CAM, nearest neighbours, latency, "Hotdog or Not" mode | `app/app.py` |
+| Web app, two services in one: "Hotdog or Not" (joke, default page) and the real food classifier (Grad-CAM, nearest neighbours, latency) | `app/app.py`, `app/views/`, `app/ui.py`, `app/core.py` |
+| Hotdog-vs-rest check for the joke service (precision/recall at the 0.5 rule) | `src/hotdog_eval.py` |
 | Tables (mean ± std over seeds) | `src/aggregate.py` -> `results/a2/summary.md` |
 
 ## Run

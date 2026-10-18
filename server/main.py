@@ -7,7 +7,7 @@ from fastapi import FastAPI, File, Form, HTTPException, UploadFile
 from fastapi.concurrency import run_in_threadpool
 from fastapi.responses import FileResponse
 from fastapi.staticfiles import StaticFiles
-from PIL import Image, UnidentifiedImageError
+from PIL import Image, ImageOps, UnidentifiedImageError
 
 from server import inference
 
@@ -23,7 +23,7 @@ async def _read_image(file: UploadFile):
     if len(data) > MAX_BYTES:
         raise HTTPException(413, "Image is larger than 10 MB")
     try:
-        return Image.open(io.BytesIO(data)).convert("RGB")
+        return ImageOps.exif_transpose(Image.open(io.BytesIO(data))).convert("RGB")
     except (UnidentifiedImageError, OSError):
         raise HTTPException(400, "Not a valid image")
 

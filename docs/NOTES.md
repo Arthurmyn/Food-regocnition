@@ -93,14 +93,20 @@ Hotdog was often rejected as "sushi" (14 of 40) and sandwich as "sushi" (10 of 4
 (`runs/*.json` per-run metrics, `summary.md`, `summary.json`, `retrieval.json`, `synthetic_filter.json`).
 A1 code in `a1/`, A1 results in `results/a1/`. How to run: `README.md`.
 
-## 6. Web app: two services in one
+## 6. Web app ("Food Lens"): two services in one
 
-- Page 1 (default): **Hotdog or Not**, joke service. Camera or upload -> "Evaluating..." spinner -> green
-  "Hotdog" / red "Not hotdog" banner. "Additional information" button below: P(hotdog), class
-  probabilities, Grad-CAM for hotdog, 5 nearest training photos, latency + device. Own artwork;
-  inspired by the gag in the TV show Silicon Valley (credit it, do not use its logos).
-- Page 2: **Food classifier**, the real service (Top-1 class, Grad-CAM, nearest neighbours, latency).
-- Page 3: synthetic images, labelled SYNTHETIC.
+Layout follows a Lovable mock-up supplied by the author (static React mock with a fake classifier; only the
+layout was reused); fonts (Schibsted Grotesk, JetBrains Mono) and colours are our own. Built with Streamlit.
+
+- **Hot Dog or Not** (joke service, default page, dark): opens straight on the camera. Photo ->
+  "Evaluating..." spinner -> green "Hotdog" / red "Not hotdog" banner. Buttons: "Take another photo",
+  "Additional information" (verdict, probabilities, Grad-CAM for hotdog, 5 nearest training photos,
+  latency + device). Fallback: upload instead of camera. Own artwork; inspired by the gag in the TV show
+  Silicon Valley (credit it, no logos).
+- **Classifier** (the real service): upload or camera -> Top-1 class + probability bars, Grad-CAM, nearest
+  training examples, latency. The page opens with `example.jpg`, a real TEST photo (the most confident
+  correct pizza), picked by hand, so say it is an illustrative example, not a typical one.
+- **Synthetic Data**: SYNTHETIC MEDIA banner, real counts (200 generated, 139 accepted), 6 samples per class.
 - Joke rule: "Hotdog" iff P(hotdog) >= 0.5 (`HOTDOG_THRESHOLD` in `app/views/hotdog.py`). Anything else,
   including non-food, is "Not hotdog".
 - Hotdog-vs-rest on the real test set (79 images, 14 hotdogs), `src/hotdog_eval.py`, thr 0.5:
@@ -109,3 +115,5 @@ A1 code in `a1/`, A1 results in `results/a1/`. How to run: `README.md`.
 - Non-photo probes (noise, flat colours, gradient, text): P(hotdog) 0.11-0.21, all "Not hotdog".
   Real non-food objects (shoe, cup, person) were NOT tested; the model never saw them, so it can
   still be confidently wrong on them. Say so in the report.
+- Privacy: the nearest-neighbour gallery shows training photos; at least one training photo shows an
+  identifiable person. Review/remove such photos before sharing the repo or app publicly.

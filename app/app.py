@@ -10,7 +10,7 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
 import theme  # noqa: E402
 
-st.set_page_config(page_title="Food Lens", page_icon="🌭", layout="centered")
+st.set_page_config(page_title="Food Lens", page_icon="🌭", layout="wide")
 
 pages = [
     st.Page("views/classifier.py", title="Classifier", url_path="classifier"),

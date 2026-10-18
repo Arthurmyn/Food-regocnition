@@ -12,7 +12,7 @@ from core import CLASSES, DEVICE, HOTDOG, gradcam_overlay, get_model, load_image
 
 HOTDOG_THRESHOLD = 0.4  # P(hotdog) needed for a green check (validation F1 is flat for 0.35-0.5)
 
-theme.apply(dark=True)
+theme.apply()
 ss = st.session_state
 ss.setdefault("hd_n", 0)      # camera widget generation: a new key gives a fresh live camera
 ss.setdefault("hd_data", None)  # bytes of the current photo
@@ -22,7 +22,7 @@ st.html('<div style="text-align:center;margin-top:.4rem"><h1 style="margin:0;fon
         'Is it a hot dog?</h1><p style="color:var(--muted);margin:.3rem 0 1rem">'
         'A deeply unnecessary computer vision experiment.</p></div>')
 
-_, mid, _ = st.columns([1, 1.7, 1])
+_, mid, _ = st.columns([1, 1.25, 1])
 
 with mid:
     if ss.hd_data is None:

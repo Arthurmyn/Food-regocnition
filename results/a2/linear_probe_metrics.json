@@ -1,0 +1,225 @@
+{
+ "selection": {
+  "0.01": 0.7778,
+  "0.03": 0.7778,
+  "0.1": 0.7901,
+  "0.3": 0.7778,
+  "1": 0.7901,
+  "3": 0.7778,
+  "10": 0.7654
+ },
+ "chosen_C": 0.1,
+ "val_acc_at_chosen_C": 0.7901,
+ "probe_train_only": {
+  "test": {
+   "accuracy": 0.8987,
+   "f1_macro": 0.9016,
+   "per_class_recall": {
+    "burger": 0.765,
+    "hotdog": 0.929,
+    "pizza": 0.938,
+    "sandwich": 0.941,
+    "sushi": 0.933
+   }
+  },
+  "synthetic_all": {
+   "accuracy": 0.9,
+   "f1_macro": 0.9016,
+   "per_class_recall": {
+    "burger": 0.925,
+    "hotdog": 0.75,
+    "pizza": 0.975,
+    "sandwich": 0.875,
+    "sushi": 0.975
+   }
+  }
+ },
+ "probe_deployed_train_plus_val": {
+  "test": {
+   "accuracy": 0.8861,
+   "f1_macro": 0.8915,
+   "per_class_recall": {
+    "burger": 0.706,
+    "hotdog": 0.929,
+    "pizza": 0.938,
+    "sandwich": 0.882,
+    "sushi": 1.0
+   }
+  },
+  "synthetic_all": {
+   "accuracy": 0.895,
+   "f1_macro": 0.8954,
+   "per_class_recall": {
+    "burger": 0.925,
+    "hotdog": 0.75,
+    "pizza": 1.0,
+    "sandwich": 0.85,
+    "sushi": 0.95
+   }
+  },
+  "test_rotated_90": {
+   "accuracy": 0.7975,
+   "f1_macro": 0.7968,
+   "per_class_recall": {
+    "burger": 0.529,
+    "hotdog": 1.0,
+    "pizza": 0.938,
+    "sandwich": 0.588,
+    "sushi": 1.0
+   }
+  },
+  "hotdog_vs_rest_test": {
+   "0.3": {
+    "precision": 0.765,
+    "recall": 0.929
+   },
+   "0.4": {
+    "precision": 0.867,
+    "recall": 0.929
+   },
+   "0.5": {
+    "precision": 1.0,
+    "recall": 0.929
+   },
+   "0.6": {
+    "precision": 1.0,
+    "recall": 0.929
+   }
+  },
+  "hotdog_vs_rest_synthetic": {
+   "0.3": {
+    "precision": 0.854,
+    "recall": 0.875
+   },
+   "0.4": {
+    "precision": 0.886,
+    "recall": 0.775
+   },
+   "0.5": {
+    "precision": 0.967,
+    "recall": 0.725
+   },
+   "0.6": {
+    "precision": 0.96,
+    "recall": 0.6
+   }
+  }
+ },
+ "probe_plus_synthetic": {
+  "real+all_synthetic": {
+   "test": {
+    "accuracy": 0.8861,
+    "f1_macro": 0.8895,
+    "per_class_recall": {
+     "burger": 0.706,
+     "hotdog": 0.929,
+     "pizza": 0.938,
+     "sandwich": 0.941,
+     "sushi": 0.933
+    }
+   }
+  },
+  "real+filtered_synthetic": {
+   "test": {
+    "accuracy": 0.8987,
+    "f1_macro": 0.9007,
+    "per_class_recall": {
+     "burger": 0.706,
+     "hotdog": 0.929,
+     "pizza": 0.938,
+     "sandwich": 0.941,
+     "sushi": 1.0
+    }
+   }
+  },
+  "real_only (train)": {
+   "test": {
+    "accuracy": 0.8987,
+    "f1_macro": 0.9016,
+    "per_class_recall": {
+     "burger": 0.765,
+     "hotdog": 0.929,
+     "pizza": 0.938,
+     "sandwich": 0.941,
+     "sushi": 0.933
+    }
+   }
+  }
+ },
+ "a1_finetuned": {
+  "test": {
+   "accuracy": 0.7975,
+   "f1_macro": 0.8013,
+   "per_class_recall": {
+    "burger": 0.706,
+    "hotdog": 1.0,
+    "pizza": 0.75,
+    "sandwich": 0.706,
+    "sushi": 0.867
+   }
+  },
+  "synthetic_all": {
+   "accuracy": 0.78,
+   "f1_macro": 0.7697,
+   "per_class_recall": {
+    "burger": 0.95,
+    "hotdog": 0.525,
+    "pizza": 0.95,
+    "sandwich": 0.5,
+    "sushi": 0.975
+   }
+  },
+  "test_rotated_90": {
+   "accuracy": 0.7089,
+   "f1_macro": 0.6836,
+   "per_class_recall": {
+    "burger": 0.176,
+    "hotdog": 1.0,
+    "pizza": 0.812,
+    "sandwich": 0.765,
+    "sushi": 0.867
+   }
+  },
+  "hotdog_vs_rest_test": {
+   "0.3": {
+    "precision": 0.7,
+    "recall": 1.0
+   },
+   "0.4": {
+    "precision": 0.875,
+    "recall": 1.0
+   },
+   "0.5": {
+    "precision": 1.0,
+    "recall": 0.929
+   },
+   "0.6": {
+    "precision": 1.0,
+    "recall": 0.857
+   }
+  },
+  "hotdog_vs_rest_synthetic": {
+   "0.3": {
+    "precision": 0.862,
+    "recall": 0.625
+   },
+   "0.4": {
+    "precision": 0.895,
+    "recall": 0.425
+   },
+   "0.5": {
+    "precision": 1.0,
+    "recall": 0.375
+   },
+   "0.6": {
+    "precision": 1.0,
+    "recall": 0.225
+   }
+  }
+ },
+ "paired_test": {
+  "probe_right_a1_wrong": 9,
+  "a1_right_probe_wrong": 2
+ },
+ "export_check_max_prob_diff": 2.0878247464217736e-08
+}

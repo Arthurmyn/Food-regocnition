@@ -100,11 +100,13 @@ a fake classifier; only the layout was reused); fonts (Schibsted Grotesk, JetBra
 API: `POST /api/predict` (class probabilities, mean latency of 10 warm runs, device, 5 nearest training photos),
 `POST /api/explain` (Grad-CAM overlay for a class), `GET /api/synthetic` (counts + samples).
 
-- **Hot Dog or Not** (joke service, home page, dark): the camera opens as soon as the page loads. Shutter ->
-  "Evaluating..." spinner (at least 1.2 s) -> green "Hotdog" / red "Not hotdog" banner. Buttons: "Take another
-  photo", "Additional information" (verdict, probabilities, Grad-CAM for hotdog, 5 nearest training photos,
-  latency + device). Fallback: upload a photo if the camera is unavailable. Own artwork; inspired by the gag in
-  the TV show Silicon Valley (credit it, no logos).
+- **Hot Dog or Not** (joke service, home page): the camera opens as soon as the page loads, on the REAR camera by
+  default (`facingMode: environment`, with a "Flip camera" button). Shutter -> "Evaluating..." spinner (at least
+  1.2 s) -> green "Hotdog" / red "Not hotdog" banner. Buttons: "Take another photo", "Additional information"
+  (verdict, probabilities, Grad-CAM for hotdog, 5 nearest training photos, latency + device). Fallback: upload a
+  photo if the camera is unavailable. Own artwork; inspired by the gag in the TV show Silicon Valley (credit it).
+  Streamlit's `st.camera_input` cannot choose a camera, so the Streamlit version uses a small custom component
+  (`app/rear_camera/`, plain JS, no build step).
 - **Classifier** (the real service): upload / drag-and-drop / camera -> Top-1 class + probability bars, Grad-CAM,
   nearest training examples, latency. The page opens with `example.jpg`, a real TEST photo (the most confident
   correct pizza), picked by hand, so say it is an illustrative example, not a typical one.
@@ -165,3 +167,14 @@ orientation applied everywhere; hot dog threshold 0.4; nearest-neighbour index r
 better baseline found in A2. (3) 79 test images: differences under ~5 points are not reliable. (4) The remaining
 weakness is the data: 535 images with ambiguous classes (burger / sandwich / hot dog) and a few mislabelled
 or person-containing photos.
+
+## 8. UI fixes after the first public test (Streamlit Cloud)
+
+Reported: front camera opened, nav buttons did not respond, colours disliked, too much empty space, header missing.
+Causes and fixes (verified locally in headless Chrome with a fake camera; not on Streamlit Cloud itself):
+- Streamlit's own fixed header covered our header row and swallowed clicks -> content pushed below it, native
+  header made transparent and click-through.
+- `layout="wide"`, content width up to 1480 px; one-row compact header and tighter padding on phones.
+- Palette: light "ketchup and mustard" (#FAF7F2 background, #D62828 red accent, #F7B500 mustard); phone frame stays dark.
+- Rear camera by default (see section 6).
+Not verified: a real phone, the rear camera on real hardware (the test feed has one fake camera), the deployed site.

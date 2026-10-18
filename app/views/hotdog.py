@@ -58,7 +58,7 @@ if show_info:
         st.markdown(f"**Verdict:** P(hotdog) = **{probs[HOTDOG]:.0%}** "
                     f"(needs ≥ {HOTDOG_THRESHOLD:.0%} for a green check). "
                     f"Best guess among the 5 classes: **{CLASSES[best]}** ({probs[best]:.0%}).")
-        st.bar_chart({k: float(v) for k, v in zip(CLASSES, probs)})
+        st.bar_chart({k: float(v) for k, v in zip(CLASSES, probs)}, height=200)
 
         a, b = st.columns(2)
         a.image(img, caption="Your photo", width="stretch")

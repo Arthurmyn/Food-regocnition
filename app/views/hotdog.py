@@ -8,6 +8,7 @@ from PIL import Image
 
 import theme
 import ui
+from rear_camera import rear_camera
 from core import CLASSES, DEVICE, HOTDOG, gradcam_overlay, get_model, load_image, nearest, predict, thumb
 
 HOTDOG_THRESHOLD = 0.4  # P(hotdog) needed for a green check (validation F1 is flat for 0.35-0.5)
@@ -27,13 +28,13 @@ _, mid, _ = st.columns([1, 1.25, 1])
 with mid:
     if ss.hd_data is None:
         # No photo yet: show the camera right away.
-        shot = st.camera_input("Take a photo", key=f"hd_cam_{ss.hd_n}", label_visibility="collapsed")
+        shot = rear_camera(key=f"hd_cam_{ss.hd_n}")
         with st.expander("No camera? Upload a photo instead"):
             up = st.file_uploader("Photo", type=["jpg", "jpeg", "png", "webp"], key=f"hd_up_{ss.hd_n}",
                                   label_visibility="collapsed")
-        pic = shot or up
-        if pic is not None:
-            ss.hd_data, ss.hd_fresh = pic.getvalue(), True
+        data = shot or (up.getvalue() if up is not None else None)
+        if data is not None:
+            ss.hd_data, ss.hd_fresh = data, True
             st.rerun()
         st.html('<p style="text-align:center;font-size:11px;color:var(--muted);margin-top:2rem">'
                 'This model knows only five food classes. It may be confidently wrong about almost '

@@ -7,7 +7,7 @@ import streamlit as st
 from PIL import Image
 
 import ui
-from core import HOTDOG, predict
+from core import CLASSES, DEVICE, HOTDOG, gradcam_overlay, get_model, nearest, predict, thumb
 
 HOTDOG_THRESHOLD = 0.5  # P(hotdog) needed for a green check; anything else is "Not hotdog"
 
@@ -41,3 +41,35 @@ if st.session_state.get("hd_key") != key:  # new photo: run the model behind the
 
 probs = st.session_state["hd_probs"]
 screen.html(ui.screen_result(b64, bool(probs[HOTDOG] >= HOTDOG_THRESHOLD)))
+
+
+# --- Additional information (button below the phone) ---
+def _toggle_info():
+    st.session_state.hd_info = not st.session_state.get("hd_info", False)
+
+
+show_info = st.session_state.get("hd_info", False)
+st.button("Hide information" if show_info else "Additional information", on_click=_toggle_info,
+          icon="ℹ️", width="stretch")
+
+if show_info:
+    with st.container(border=True):
+        best = int(probs.argmax())
+        st.markdown(f"**Verdict:** P(hotdog) = **{probs[HOTDOG]:.0%}** "
+                    f"(needs ≥ {HOTDOG_THRESHOLD:.0%} for a green check). "
+                    f"Best guess among the 5 classes: **{CLASSES[best]}** ({probs[best]:.0%}).")
+        st.bar_chart({k: float(v) for k, v in zip(CLASSES, probs)})
+
+        a, b = st.columns(2)
+        a.image(img, caption="Your photo", width="stretch")
+        b.image(gradcam_overlay(get_model(), img, HOTDOG)[0], caption="Where the model looks for 'hotdog' "
+                "(Grad-CAM)", width="stretch")
+
+        st.markdown("**Closest training photos**")
+        for col, (path, label, sim) in zip(st.columns(5), nearest(st.session_state["hd_q"])):
+            col.image(thumb(path, label), caption=f"{CLASSES[label]} {sim:.2f}", width="stretch")
+
+        st.caption(f"Inference: {st.session_state['hd_ms']:.1f} ms on {DEVICE}. This joke mode reuses the "
+                   "5-class food model (burger, hotdog, pizza, sandwich, sushi). It has never seen shoes, "
+                   "bananas or people, so on non-food it can be confidently wrong. Inspired by the "
+                   "'Not Hotdog' gag from the TV show Silicon Valley.")

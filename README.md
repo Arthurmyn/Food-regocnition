@@ -30,6 +30,7 @@ A1 (HOG+SVM baseline and EfficientNet-B0) lives in `a1/`. A2 adds:
 | Parameterised training (seeds, augmentation switch, optional synthetic train data) | `src/train.py` |
 | Synthetic image generation (SD-Turbo text-to-image, hard-case prompts) | `src/generate_synthetic.py` |
 | Classifier-based filtering of synthetic images | `src/filter_synthetic.py` |
+| Linear probe on frozen ImageNet features (the deployed model) | `src/train_linear_probe.py` |
 | Retrieval index + precision@k | `src/retrieval.py` |
 | Grad-CAM (pure PyTorch) | `src/explain.py` |
 | Web app "Food Lens" (FastAPI API + plain HTML/CSS/JS frontend): "Hot Dog or Not" (joke, opens on the camera, home page), the real classifier (Grad-CAM, nearest neighbours, latency) and a synthetic-images page | `app/` (Streamlit) or `server/` + `web/` (FastAPI + HTML) |
@@ -46,6 +47,7 @@ python3 a1/split_dataset.py                       # seed 42 -> 375/81/79
 python3 src/generate_synthetic.py --per-class 40   # downloads SD-Turbo (~2 GB)
 python3 src/filter_synthetic.py --thr 0.5
 ./scripts/run_ablation.sh                              # real + synthetic, 5 seeds
+python3 src/train_linear_probe.py                  # deployed model + metrics vs the A1 fine-tuned one
 python3 src/retrieval.py                           # P@k + results/a2/index.npz
 python3 src/aggregate.py
 python3 src/make_figures.py
@@ -54,7 +56,8 @@ uvicorn server.main:app --port 8000      # FastAPI + HTML version, then open htt
 ```
 
 `results/a1/efficientnet_best.pt` is the A1 checkpoint (79.7% test accuracy, reproduced).
-The app serves the A1 checkpoint. The retrieval index (`results/a2/index.npz`) is built from it.
+The apps serve `results/a2/linear_probe.pt` (frozen ImageNet EfficientNet-B0 + linear head, trained by
+`src/train_linear_probe.py`; see docs/NOTES.md section 7). The retrieval index (`results/a2/index.npz`) is built from it.
 The camera needs HTTPS or `localhost`. Deployment (Streamlit Cloud, other hosts): `docs/DEPLOY.md`.
 
 ## Synthetic media and ethics

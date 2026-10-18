@@ -92,3 +92,20 @@ Hotdog was often rejected as "sushi" (14 of 40) and sandwich as "sushi" (10 of 4
 `app/app.py`, `scripts/run_baselines.sh`, `scripts/run_ablation.sh`; results in `results/a2/`
 (`runs/*.json` per-run metrics, `summary.md`, `summary.json`, `retrieval.json`, `synthetic_filter.json`).
 A1 code in `a1/`, A1 results in `results/a1/`. How to run: `README.md`.
+
+## 6. Web app: two services in one
+
+- Page 1 (default): **Hotdog or Not**, joke service. Camera or upload -> "Evaluating..." spinner -> green
+  "Hotdog" / red "Not hotdog" banner. "Additional information" button below: P(hotdog), class
+  probabilities, Grad-CAM for hotdog, 5 nearest training photos, latency + device. Own artwork;
+  inspired by the gag in the TV show Silicon Valley (credit it, do not use its logos).
+- Page 2: **Food classifier**, the real service (Top-1 class, Grad-CAM, nearest neighbours, latency).
+- Page 3: synthetic images, labelled SYNTHETIC.
+- Joke rule: "Hotdog" iff P(hotdog) >= 0.5 (`HOTDOG_THRESHOLD` in `app/views/hotdog.py`). Anything else,
+  including non-food, is "Not hotdog".
+- Hotdog-vs-rest on the real test set (79 images, 14 hotdogs), `src/hotdog_eval.py`, thr 0.5:
+  precision 1.00, recall 0.93 (13/14), accuracy 0.99. Thr 0.4: precision 0.88, recall 1.00.
+  Tiny test set, so treat as indicative.
+- Non-photo probes (noise, flat colours, gradient, text): P(hotdog) 0.11-0.21, all "Not hotdog".
+  Real non-food objects (shoe, cup, person) were NOT tested; the model never saw them, so it can
+  still be confidently wrong on them. Say so in the report.

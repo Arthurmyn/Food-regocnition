@@ -8,9 +8,9 @@ from PIL import Image
 
 import theme
 import ui
-from core import CLASSES, DEVICE, HOTDOG, gradcam_overlay, get_model, nearest, predict, thumb
+from core import CLASSES, DEVICE, HOTDOG, gradcam_overlay, get_model, load_image, nearest, predict, thumb
 
-HOTDOG_THRESHOLD = 0.5  # P(hotdog) needed for a green check; anything else is "Not hotdog"
+HOTDOG_THRESHOLD = 0.4  # P(hotdog) needed for a green check (validation F1 is flat for 0.35-0.5)
 
 theme.apply(dark=True)
 ss = st.session_state
@@ -40,7 +40,7 @@ with mid:
                 'everything else.</p>')
         st.stop()
 
-    img = Image.open(io.BytesIO(ss.hd_data)).convert("RGB")
+    img = load_image(io.BytesIO(ss.hd_data))
     b64 = ui.to_b64(img)
     screen = st.empty()
     if ss.pop("hd_fresh", False):  # new photo: run the model behind the spinner

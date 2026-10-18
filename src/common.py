@@ -7,9 +7,10 @@ import torch
 import torch.nn as nn
 from torchvision import datasets, models, transforms
 
-SPLIT_DIR = "dataset_split"
-RESULTS_DIR = "results/a2"
-A1_CHECKPOINT = "results/a1/efficientnet_best.pt"  # A1 EfficientNet-B0 (79.7% test acc)
+ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+SPLIT_DIR = os.path.join(ROOT, "dataset_split")
+RESULTS_DIR = os.path.join(ROOT, "results", "a2")
+A1_CHECKPOINT = os.path.join(ROOT, "results", "a1", "efficientnet_best.pt")  # A1 EfficientNet-B0 (79.7% test acc)
 CLASSES = ["burger", "hotdog", "pizza", "sandwich", "sushi"]
 IMAGE_SIZE = 224
 IMAGENET_MEAN = [0.485, 0.456, 0.406]

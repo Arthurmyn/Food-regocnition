@@ -10,8 +10,8 @@ FONTS = ("@import url('https://fonts.googleapis.com/css2?family=Schibsted+Grotes
          "&family=JetBrains+Mono:wght@400;500&display=swap');")
 
 LIGHT = """
-:root{--bg:#EEF0EA;--card:#FBFBF8;--ink:#16201B;--muted:#5E6A63;--line:#D3D9CF;--accent:#C98F00;
-  --ok:#1E6B47;--ok-soft:#D9EEE2;--syn:#B02672;--syn-soft:#F8E3EF;--track:#DFE4DA}
+:root{--bg:#FAF7F2;--card:#FFFFFF;--ink:#1C1917;--muted:#6B645C;--line:#E7E0D6;--accent:#D62828;
+  --accent2:#F7B500;--ok:#2E9E4F;--ok-soft:#E3F4E8;--syn:#B02672;--syn-soft:#F8E3EF;--track:#EFE9DF}
 """
 
 DARK = """
@@ -21,7 +21,7 @@ DARK = """
 header[data-testid="stHeader"]{background:transparent!important}
 [data-testid="stCameraInputWebcamStyledBox"],[data-testid="stCameraInput"] > div{background:var(--card)!important;
   border:1px solid var(--line);border-radius:6px;color:var(--ink)}
-[data-testid="stCameraInput"] button{background:var(--accent)!important;color:#1A1300!important;border:0;
+[data-testid="stCameraInput"] button{background:var(--accent)!important;color:#fff!important;border:0;
   font-weight:600}
 [data-testid="stCameraInputWebcamComponent"] div{background:transparent!important}
 [data-testid="stCameraInput"] a{color:var(--accent)!important}
@@ -38,10 +38,12 @@ BASE = """
 .stApp [data-testid="stCaptionContainer"]{color:var(--ink)}
 .stApp [data-testid="stCaptionContainer"]{color:var(--muted)}
 .mono{font-family:'JetBrains Mono',ui-monospace,monospace}
-.block-container{max-width:1100px;padding-top:2rem;padding-bottom:3rem}
+.block-container{max-width:min(1480px,96vw)!important;padding:4.4rem 2rem 3rem!important}
+header[data-testid="stHeader"]{background:transparent!important;pointer-events:none}
+header[data-testid="stHeader"] *{pointer-events:auto}
 h1,h2,h3{letter-spacing:-.015em;font-weight:600}
 .fl-brand{display:flex;align-items:center;gap:8px;font-weight:700;font-size:17px;color:var(--ink)}
-.fl-dot{width:13px;height:13px;border-radius:3px;background:var(--accent);display:inline-block}
+.fl-dot{width:13px;height:13px;border-radius:3px;background:var(--accent2);display:inline-block}
 .fl-pill{border:1px solid var(--line);border-radius:999px;padding:3px 10px;font-size:11px;
   color:var(--muted);white-space:nowrap;float:right}
 .fl-pill i{display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--ok);margin-right:6px;

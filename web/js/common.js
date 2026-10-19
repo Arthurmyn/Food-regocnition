@@ -3,13 +3,16 @@
 export const esc = (s) => String(s).replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[c]);
 export const cap = (s) => s.charAt(0).toUpperCase() + s.slice(1);
 
+// authored mark: a sausage longer than its bun
+const MARK = `<svg width="28" height="28" viewBox="0 0 28 28" aria-hidden="true"><rect x="3" y="7" width="22" height="14" rx="7" fill="#F7B500"/><rect x="0.75" y="11" width="26.5" height="6.5" rx="3.25" fill="#D62828"/></svg>`;
+
 export function header(active) {
   const links = [["/classifier", "Classifier", "classifier"], ["/", "Hot Dog or Not", "hotdog"], ["/synthetic", "Synthetic Data", "synthetic"]];
   document.getElementById("header").innerHTML = `
-    <div class="head"><div class="head-row">
-      <a class="brand" href="/"><i></i>Food Lens</a>
-      <nav class="nav">${links.map(([h, t, k]) => `<a href="${h}" class="${k === active ? "on" : ""}">${t}</a>`).join("")}</nav>
-      <span class="pill"><i></i>EfficientNet-B0 · Local model</span>
+    <div class="head"><div class="lens-head">
+      <a class="lens-brand" href="/">${MARK}Food Lens</a>
+      <nav class="lens-nav">${links.map(([h, t, k]) => `<a href="${h}" ${k === active ? 'aria-current="page"' : ""}>${t}</a>`).join("")}</nav>
+      <span class="lens-meta">EfficientNet-B0 · frozen features + linear head</span>
     </div></div>`;
 }
 
@@ -52,7 +55,7 @@ export function bars(classes, probs, top) {
       <span class="mono">${Math.round(probs[i] * 100)}%</span></li>`).join("")}</ul>`;
 }
 export function neighbors(list) {
-  return list.map((n) => `<figure><img src="${esc(n.url)}" alt="${esc(n.label)}" loading="lazy">
+  return list.map((n) => `<figure><img src="${esc(n.url)}" alt="${esc(n.label)} training photo" loading="lazy">
     <figcaption><span>${esc(cap(n.label))}</span><span>${n.sim.toFixed(2)}</span></figcaption></figure>`).join("");
 }
 export const footer = (r) => `<div class="foot">Inference: ${Math.round(r.latency_ms)} ms · Device: ${esc(r.device)}</div>`;

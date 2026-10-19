@@ -7,37 +7,48 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap">
   <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/lens.css">
 </head>
 <body>
   <div id="header"></div>
-  <main class="wrap">
-    <h1 class="page-title">Classify a food image</h1>
-    <p class="page-sub">Upload a photo to identify burger, hotdog, pizza, sandwich, or sushi.</p>
+  <main class="wrap lens">
+    <h1>Classify a food image</h1>
+    <p class="lede">Drop in a photo and the model names the dish, shows how sure it is, and shows where it looked.</p>
 
-    <div class="cols">
+    <div class="cls">
       <section>
-        <div class="drop" id="drop">
-          <p>Drop an image here or <b>browse files</b></p>
-          <label class="btn">Browse files<input id="file" type="file" accept="image/jpeg,image/png,image/webp" hidden></label>
-          <button class="btn" id="camBtn" type="button">Use camera</button>
+        <div class="pick" id="drop">
+          <span class="hint">Drop a photo anywhere here, or</span>
+          <label class="btn2 solid">Choose photo<input id="file" type="file" accept="image/jpeg,image/png,image/webp" hidden></label>
+          <button class="btn2" id="camBtn" type="button">Use camera</button>
         </div>
-        <div class="live" id="live" hidden>
+        <div class="live" id="live" hidden style="margin:0 0 18px">
           <video id="cam" autoplay playsinline muted></video>
           <button id="shutter" class="shutter" aria-label="Take photo"></button>
         </div>
         <p class="note" id="camErr" hidden></p>
-        <div class="card" style="margin-top:14px">
-          <div style="position:relative"><img id="preview" class="img" style="aspect-ratio:4/3" alt="Image being classified">
-            <span class="tag" id="name">example.jpg</span></div>
-          <div class="foot">Accepted: JPG, PNG, WEBP · the first image is a real test-set photo shown as an example</div>
+
+        <div class="stage">
+          <input class="vh" type="radio" name="view" id="v-photo" checked>
+          <input class="vh" type="radio" name="view" id="v-heat">
+          <div class="stage-frame">
+            <img id="preview" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="Photo being classified">
+            <img id="heat" class="heat" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="Grad-CAM heatmap over the photo">
+          </div>
+          <div class="seg"><label for="v-photo">Photo</label><label for="v-heat">Heatmap</label></div>
+          <span class="src" id="name">example.jpg</span>
         </div>
+        <p class="stage-note" id="stageNote"></p>
       </section>
 
-      <section class="card" id="result"><div class="pad"><p class="note">Loading…</p></div></section>
+      <section class="readout" id="result"><div class="skel"><i></i><i></i><i></i><i></i><i></i></div></section>
     </div>
 
-    <div class="sec"><h2>Closest training examples</h2><span>Nearest neighbours by cosine similarity in embedding space</span></div>
-    <div class="grid5" id="near"></div>
+    <div class="sec2">
+      <h2>Closest training photos</h2>
+      <p>Nearest neighbours by cosine similarity in the model's feature space.</p>
+      <div class="contact" id="near"></div>
+    </div>
   </main>
   <script type="module" src="/js/classifier.js"></script>
 </body>

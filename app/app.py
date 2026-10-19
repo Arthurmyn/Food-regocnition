@@ -18,5 +18,5 @@ pages = [
     st.Page("views/synthetic.py", title="Synthetic Data", url_path="synthetic"),
 ]
 current = st.navigation(pages, position="hidden")
-theme.header(pages)
+theme.header(pages, current)
 current.run()

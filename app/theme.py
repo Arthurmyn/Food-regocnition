@@ -1,6 +1,8 @@
 # Look and feel shared by all pages: fonts, colours, header, cards, probability bars.
 # Layout follows the supplied Lovable mock-up; fonts and colours are our own.
+import base64
 import html
+import os
 
 import streamlit as st
 
@@ -10,7 +12,7 @@ FONTS = ("@import url('https://fonts.googleapis.com/css2?family=Schibsted+Grotes
          "&family=JetBrains+Mono:wght@400;500&display=swap');")
 
 LIGHT = """
-:root{--bg:#FAF7F2;--card:#FFFFFF;--ink:#1C1917;--muted:#6B645C;--line:#E7E0D6;--accent:#D62828;
+:root{--sans:'Schibsted Grotesk',system-ui,sans-serif;--mono:'JetBrains Mono',ui-monospace,monospace;--bg:#FAF7F2;--card:#FFFFFF;--ink:#1C1917;--muted:#6B645C;--line:#E7E0D6;--accent:#D62828;
   --accent2:#F7B500;--ok:#2E9E4F;--ok-soft:#E3F4E8;--syn:#B02672;--syn-soft:#F8E3EF;--track:#EFE9DF}
 """
 
@@ -97,37 +99,69 @@ li.top .fl-fill{background:var(--ok);opacity:1}
 .stApp [data-testid="stBaseButton-primary"]{background:var(--accent)!important;border-color:var(--accent)!important;color:#fff!important;font-weight:600}
 .stApp [data-testid="stPageLink"] a{border-radius:4px}
 .stApp [data-testid="stPageLink"] a p{font-size:14px}
-/* keep the header on ONE row on phones (Streamlit stacks columns by default) */
-.st-key-fl-header [data-testid="stHorizontalBlock"]{flex-wrap:nowrap!important;gap:.15rem!important}
-.st-key-fl-header [data-testid="stColumn"]{min-width:0!important;width:auto!important;flex:1 1 auto!important}
 @media (max-width:760px){
   .block-container{padding:3.6rem .9rem 2rem!important}
-  .st-key-fl-header .fl-brand span,.st-key-fl-header .fl-brand{font-size:0}
-  .st-key-fl-header .fl-brand .fl-dot{width:16px;height:16px}
-  .st-key-fl-header [data-testid="stPageLink"] a{padding:.25rem .35rem}
-  .st-key-fl-header [data-testid="stPageLink"] a p{font-size:12px;white-space:nowrap}
-  .fl-rule{margin:.2rem 0 .8rem}
   .fl-grid{grid-template-columns:repeat(2,1fr)}.fl-syn-grid{grid-template-columns:repeat(3,1fr)}
   .fl-pill{display:none}
 }
 """
 
 
+LENS_CSS = open(os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "web", "css", "lens.css")).read()
+
+HEADER_CSS = """
+.st-key-fl-header{flex-direction:row!important;align-items:center!important;flex-wrap:wrap;gap:6px!important;
+  width:100%;max-width:1240px;margin:0 auto!important;padding:1px 0 0!important;border-bottom:1px solid var(--line)}
+.st-key-fl-header > *{width:auto!important;flex:0 0 auto!important;min-width:0}
+.st-key-fl-header [data-testid="stElementContainer"]{width:auto!important}
+.st-key-fl-header .lens-brand{margin-right:30px}
+.st-key-fl-header .lens-meta{padding-bottom:14px;white-space:nowrap}
+.st-key-fl-header [data-testid="stPageLink"] a{position:relative;padding:8px 12px 15px!important;background:transparent!important;
+  border-radius:0!important;min-height:0}
+.st-key-fl-header [data-testid="stPageLink"] a p{font-size:15px;font-weight:500;color:var(--muted);margin:0;white-space:nowrap}
+.st-key-fl-header [data-testid="stPageLink"] a:hover p{color:var(--ink)}
+.st-key-fl-header > *:last-child{margin-left:auto!important}
+.st-key-lens-page{width:100%;max-width:1240px;margin:0 auto}
+.st-key-lens-page .readout{padding-top:0}
+.st-key-lens-page [data-testid="stFileUploaderDropzone"]{border:1.5px dashed #D9CDBB;border-radius:14px;background:var(--card)}
+@media (max-width:900px){.st-key-fl-header .lens-meta{display:none}.st-key-fl-header .lens-brand{margin-right:10px}}
+@media (max-width:600px){
+  .st-key-fl-header{flex-wrap:nowrap!important;gap:2px!important}
+  .st-key-fl-header .lens-brand{margin-right:6px}
+  .st-key-fl-header [data-testid="stPageLink"] a{padding:8px 7px 15px!important}
+  .st-key-fl-header [data-testid="stPageLink"] a p{font-size:13.5px}
+  .st-key-fl-nav-0 a::after,.st-key-fl-nav-1 a::after,.st-key-fl-nav-2 a::after{left:7px!important;right:7px!important}
+}
+"""
+
+
 def apply(dark=False):
-    st.html(f"<style>{FONTS}{LIGHT if not dark else DARK}{BASE}</style>")
+    st.html(f"<style>{FONTS}{LIGHT if not dark else DARK}{BASE}{LENS_CSS}{HEADER_CSS}</style>")
 
 
-def header(pages):
-    """Brand on the left, page links in the middle, model pill on the right."""
+def svg_img(svg, size, alt=""):
+    """Streamlit's sanitizer removes inline <svg>; an <img> with a data URI is kept."""
+    return (f'<img src="data:image/svg+xml;base64,{base64.b64encode(svg.encode()).decode()}" width="{size}" height="{size}" '
+            f'alt="{alt}">')
+
+
+MARK = svg_img('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 28 28"><rect x="3" y="7" width="22" height="14" rx="7" '
+               'fill="#F7B500"/><rect x="0.75" y="11" width="26.5" height="6.5" rx="3.25" fill="#D62828"/></svg>', 28)
+
+
+def header(pages, current):
+    """Authored mark + brand, page links with an underlined current tab, quiet model note."""
+    active = next((i for i, p in enumerate(pages) if p == current), 0)
     with st.container(key="fl-header"):
-        a, b, c = st.columns([2.2, 5, 3], vertical_alignment="center")
-        a.html('<span class="fl-brand"><i class="fl-dot"></i>Food Lens</span>')
-        with b:
-            links = st.columns(len(pages))
-            for col, page in zip(links, pages):
-                col.page_link(page, label=page.title)
-        c.html('<span class="fl-pill mono"><i></i>EfficientNet-B0 · Local model</span>')
-    st.html('<hr class="fl-rule">')
+        st.html(f'<span class="lens-brand">{MARK}Food Lens</span>')
+        for i, page in enumerate(pages):
+            with st.container(key=f"fl-nav-{i}"):
+                st.page_link(page, label=page.title)
+        st.html('<span class="lens-meta">EfficientNet-B0 · frozen features + linear head</span>')
+    st.html(f"""<style>
+    .st-key-fl-nav-{active} a p{{color:var(--ink)!important;font-weight:600!important}}
+    .st-key-fl-nav-{active} a::after{{content:"";position:absolute;left:12px;right:12px;bottom:-1px;height:3px;
+      background:var(--accent);border-radius:3px 3px 0 0}}</style>""")
 
 
 def footer(device, ms=None):

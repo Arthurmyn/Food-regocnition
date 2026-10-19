@@ -12,7 +12,8 @@ src/         A2 code: train, generate_synthetic, filter_synthetic, retrieval, ex
 app/         Streamlit frontend (this is what Streamlit Cloud runs: main file app/app.py)
 server/      FastAPI app: /api/predict, /api/explain, /api/synthetic + serves web/
 web/         Frontend, plain HTML/CSS/JS (no build step): index.html (Hot Dog or Not),
-             classifier.html, synthetic.html, css/, js/, assets/ (thumbnails, synthetic samples)
+             classifier.html, synthetic.html, css/ (style.css base + lens.css, also used by the Streamlit app),
+             js/, assets/ (thumbnails, synthetic samples)
 scripts/     run_baselines.sh, run_ablation.sh
 docs/        NOTES.md (numbers and caveats for the report), DEPLOY.md
 results/a1/  A1 outputs, incl. the checkpoint efficientnet_best.pt

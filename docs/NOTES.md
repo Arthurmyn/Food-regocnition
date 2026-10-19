@@ -178,3 +178,25 @@ Causes and fixes (verified locally in headless Chrome with a fake camera; not on
 - Palette: light "ketchup and mustard" (#FAF7F2 background, #D62828 red accent, #F7B500 mustard); phone frame stays dark.
 - Rear camera by default (see section 6).
 Not verified: a real phone, the rear camera on real hardware (the test feed has one fake camera), the deployed site.
+
+## 9. Visual refinement (Classifier, Synthetic, header)
+
+Scope: polish, not a new look. Palette and fonts are the ones the author chose (cream #FAF7F2, red #D62828, mustard
+#F7B500, Schibsted Grotesk + JetBrains Mono). The Hot Dog or Not page was NOT redesigned: same screen, banners,
+spinner and buttons. It only inherits the shared header; in the Streamlit version it sits about 29 px higher
+because the new header is more compact (pixel comparison against the previous version: 0.2% of pixels differ
+after aligning that shift; plain-HTML version: layout identical to within 1 px).
+
+- One stylesheet for both frontends: `web/css/lens.css` (Streamlit reads the same file in `app/theme.py`).
+- Classifier: photo and Grad-CAM share one frame with a Photo / Heatmap switch (CSS only, no JS), class name as the
+  headline, probabilities ranked high to low with the top class in red, "Only N% sure, treat this as a guess" below 50%,
+  latency/device/model as a quiet line, nearest training photos as a contact sheet.
+- Synthetic: warning strip first, one sentence with the real numbers, per-class acceptance bar (37/40, 15/40 ...).
+- Header: authored hot-dog mark, underlined current tab, one row on phones.
+- Details: themed text selection, scrollbar and focus ring, tabular numerals, reduced-motion support, one entrance
+  animation (bars grow, class name rises).
+- Streamlit quirk: `st.html` strips inline `<svg>`, so the logo and the warning icon are `<img>` data URIs there.
+- Detector (impeccable) findings left on purpose: heatmap image at opacity 0 (it is the unselected state of the
+  switch), pill controls over the photo ("nested cards"), photo filling its frame ("cramped padding"), warm drop
+  shadow ("dark glow", page is light), cream background (chosen by the author).
+

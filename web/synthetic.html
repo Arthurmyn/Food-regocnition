@@ -7,17 +7,18 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap">
   <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/lens.css">
 </head>
 <body>
   <div id="header"></div>
-  <main class="wrap">
-    <h1 class="page-title">Synthetic training images</h1>
-    <div class="warn" style="margin-top:14px"><b>SYNTHETIC MEDIA</b> — every image on this page was generated with
-      SD-Turbo for an academic experiment. None is a real photograph.</div>
-    <div class="cols-syn" style="margin-top:26px">
-      <aside><dl class="card stat" id="stats"></dl></aside>
-      <div id="classes"></div>
+  <main class="wrap lens">
+    <h1>Synthetic training images</h1>
+    <div class="syn-warn" role="note">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3 2.5 20h19L12 3z"/><path d="M12 10v4.5M12 17.5v.01"/></svg>
+      <span><b>SYNTHETIC MEDIA.</b> Every image on this page was generated with SD-Turbo for an academic experiment. None is a real photograph.</span>
     </div>
+    <p class="lede" id="lede" style="margin-top:30px">&nbsp;</p>
+    <div id="classes"></div>
   </main>
   <script type="module" src="/js/synthetic.js"></script>
 </body>

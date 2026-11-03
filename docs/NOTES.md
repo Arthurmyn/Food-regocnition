@@ -50,8 +50,10 @@ Retrieval P@k (train-set index, test queries):
 | Frozen ImageNet EfficientNet-B0 | 0.873 | 0.805 | 0.762 |
 | A1 fine-tuned model | 0.835 | 0.719 | 0.642 |
 
-Latency (app, MPS, forward pass only, warm, mean of 10): about 6 ms. Measured while training was
-running in the background, so re-measure on an idle machine for the report.
+Latency (app, MPS, forward pass only, warm, mean of 10): 7.6 ms in a local FastAPI smoke test;
+subsequent browser runs displayed 9–16 ms. This excludes image upload, preprocessing, Grad-CAM,
+retrieval, network and rendering time; measure again on the presentation machine before describing
+it as typical.
 
 Synthetic filter: burger 37/40, hotdog 15/40, pizza 36/40, sandwich 15/40, sushi 36/40 accepted.
 Hotdog was often rejected as "sushi" (14 of 40) and sandwich as "sushi" (10 of 40).
@@ -71,19 +73,22 @@ Hotdog was often rejected as "sushi" (14 of 40) and sandwich as "sushi" (10 of 4
   weights were used). Say so in the report and cite Neurohive for the assigned methods.
 - Some real images come from the web (A1 report section 2.3 mentions a watermarked hotdog image).
 - "Hotdog or Not" has only seen 4 other food classes; it will be confidently wrong on non-food.
-- Grad-CAM example: the pizza test image is predicted as hotdog (33%), attention is on a bottle/label,
-  not on the pizza. Good failure case to show.
-- Not tested: browser upload/camera widgets in the app (only the loading, model, Grad-CAM, kNN and
-  latency code paths were tested).
+- Deployed-model Grad-CAM example: the pizza test image is predicted as sandwich (63%); the heatmap
+  includes the pizza and adjacent bottle/label. The refreshed figure uses the app's frozen-feature probe,
+  not the older A1 checkpoint visualization.
+- FastAPI browser upload, prediction, heatmap switch, nearest-neighbour gallery and synthetic page were
+  smoke-tested locally with `web/assets/example.jpg`. The real camera, Streamlit camera widget, real
+  phone, and remote deployment were not tested.
 
 ## 4. Figures available
 
 - `results/a2/gradcam_examples.png`: one test image per class with Grad-CAM (includes a failure case).
+- `results/a2/nearest_neighbors.png`: the illustrative real test query and its five nearest real training images.
 - `results/a2/a2_training_curves.png`: mean train loss / val acc per condition (5 seeds).
 - `results/a1/efficientnet_training_curves.png`, `results/a1/confusion_matrix_*_test.png`: A1.
 - `results/a2/synthetic_contact_sheet.jpg`: 8 synthetic images per class.
 - `results/a1/dataset_eda.png`: class balance / sizes.
-- Still to make yourself: app screenshots, a nearest-neighbour gallery figure (take it from the app).
+- Still to make yourself: app screenshots and the 3–5 minute demo recording.
 
 ## 5. Files
 
@@ -199,4 +204,3 @@ after aligning that shift; plain-HTML version: layout identical to within 1 px).
 - Detector (impeccable) findings left on purpose: heatmap image at opacity 0 (it is the unselected state of the
   switch), pill controls over the photo ("nested cards"), photo filling its frame ("cramped padding"), warm drop
   shadow ("dark glow", page is light), cream background (chosen by the author).
-

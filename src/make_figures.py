@@ -4,18 +4,17 @@ from collections import defaultdict
 import matplotlib; matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 import numpy as np
-from PIL import Image
-from common import CLASSES, RESULTS_DIR, load_model
+from PIL import Image, ImageOps
+from common import CLASSES, DEPLOY_CHECKPOINT, DEVICE, RESULTS_DIR, ROOT, embed, load_model
 from explain import center_crop_rgb, gradcam_overlay
 import torch
 from explain import preprocess
-from common import DEVICE
 
-m = load_model()
+m = load_model(DEPLOY_CHECKPOINT)
 fig, ax = plt.subplots(2, 5, figsize=(14, 6))
 for j, c in enumerate(CLASSES):
     d = f"dataset_split/test/{c}"; f = sorted(os.listdir(d))[0]
-    img = Image.open(os.path.join(d, f)).convert("RGB")
+    img = ImageOps.exif_transpose(Image.open(os.path.join(d, f))).convert("RGB")
     with torch.no_grad():
         p = torch.softmax(m(preprocess(img).to(DEVICE)), 1)[0]
     k = int(p.argmax())
@@ -34,3 +33,25 @@ for name, hs in sorted(runs.items()):
 ax[0].set_title("Train loss (mean of 5 seeds)"); ax[1].set_title("Val accuracy (mean of 5 seeds)")
 for a in ax: a.axvline(9.5, ls=":", c="gray"); a.set_xlabel("epoch (dotted: head -> fine-tune)"); a.legend(fontsize=7)
 fig.tight_layout(); fig.savefig(f"{RESULTS_DIR}/a2_training_curves.png", dpi=120)
+
+query_path = os.path.join(ROOT, "web", "assets", "example.jpg")
+query = ImageOps.exif_transpose(Image.open(query_path)).convert("RGB")
+with torch.no_grad():
+    q = embed(m, preprocess(query).to(DEVICE)).cpu().numpy()[0]
+q /= np.linalg.norm(q) + 1e-12
+
+index = np.load(os.path.join(RESULTS_DIR, "index.npz"), allow_pickle=True)
+sims = index["feats"] @ q
+nearest = np.argsort(-sims)[:5]
+fig, ax = plt.subplots(1, 6, figsize=(15, 3.4))
+ax[0].imshow(center_crop_rgb(query))
+ax[0].set_title("Query\nreal test example")
+ax[0].axis("off")
+for a, i in zip(ax[1:], nearest):
+    img = ImageOps.exif_transpose(Image.open(str(index["paths"][i]))).convert("RGB")
+    a.imshow(center_crop_rgb(img))
+    a.set_title(f"{CLASSES[int(index['labels'][i])]}\ncosine {sims[i]:.3f}")
+    a.axis("off")
+fig.suptitle("Nearest training images (deployed frozen-feature model)")
+fig.tight_layout()
+fig.savefig(f"{RESULTS_DIR}/nearest_neighbors.png", dpi=140)

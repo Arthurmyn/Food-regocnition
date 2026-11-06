@@ -1,0 +1,24 @@
+name: tests
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  pytest:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+      # Only what the tests import: CPU PyTorch, the API stack and plotting. No dataset or GPU needed
+      # (the tests use the checked-in checkpoint, retrieval index and example photo).
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install torch torchvision --index-url https://download.pytorch.org/whl/cpu
+          pip install numpy pillow matplotlib fastapi httpx python-multipart pytest
+      - name: Run tests
+        run: python -m pytest -q

@@ -1,5 +1,6 @@
 # Service 1 (joke): Hot Dog or Not.
 # Opens straight on the camera. Photo -> "Evaluating..." -> green Hotdog / red Not hotdog.
+import hashlib
 import io
 import time
 
@@ -11,6 +12,7 @@ import ui
 from rear_camera import rear_camera
 from core import CLASSES, DEVICE, HOTDOG, gradcam_overlay, get_model, load_image, nearest, predict, thumb
 
+MIN_EVALUATING_S = 1.2  # how long the Evaluating... screen stays visible
 HOTDOG_THRESHOLD = 0.4  # P(hotdog) needed for a green check (validation F1 is flat for 0.35-0.5)
 
 theme.apply()
@@ -34,7 +36,7 @@ with mid:
                                   label_visibility="collapsed")
         data = shot or (up.getvalue() if up is not None else None)
         if data is not None:
-            ss.hd_data, ss.hd_fresh = data, True
+            ss.hd_data = data
             st.rerun()
         st.html('<p style="text-align:center;font-size:11px;color:var(--muted);margin-top:2rem">'
                 'This model knows only five food classes. It may be confidently wrong about almost '
@@ -44,10 +46,13 @@ with mid:
     img = load_image(io.BytesIO(ss.hd_data))
     b64 = ui.to_b64(img)
     screen = st.empty()
-    if ss.pop("hd_fresh", False):  # new photo: run the model behind the spinner
+    key = hashlib.md5(ss.hd_data).hexdigest()
+    if ss.get("hd_done") != key:  # not evaluated yet (or an earlier run was interrupted): run it behind the spinner
         screen.html(ui.screen_evaluating(b64))
+        started = time.perf_counter()
         ss.hd_probs, ss.hd_q, ss.hd_ms = predict(img)
-        time.sleep(1.2)
+        time.sleep(max(0.0, MIN_EVALUATING_S - (time.perf_counter() - started)))  # keep the spinner at least this long
+        ss.hd_done = key  # set last: only a finished evaluation counts
     probs = ss.hd_probs
     screen.html(ui.screen_result(b64, bool(probs[HOTDOG] >= HOTDOG_THRESHOLD)))
     st.html(f'<p style="text-align:center;color:var(--muted);font-size:13px;margin:.8rem 0">'

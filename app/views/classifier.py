@@ -1,6 +1,7 @@
 # Service 2 (the real one): food classifier. Same markup and stylesheet as the plain-HTML frontend (web/css/lens.css).
 import html
 import io
+import logging
 import os
 
 import streamlit as st
@@ -8,7 +9,7 @@ from PIL import Image
 
 import theme
 import ui
-from core import ASSETS, CLASSES, DEVICE, MODEL_PATH, HOTDOG, gradcam_overlay, get_model, load_image, nearest, predict, thumb
+from core import ASSETS, CLASSES, DEVICE, MODEL_PATH, HOTDOG, error_text, gradcam_overlay, get_model, load_image, nearest, predict, thumb
 from env_info import browser_label
 from rear_camera import rear_camera
 
@@ -27,24 +28,30 @@ with st.container(key="lens-page"):
     up = st.file_uploader("Drop a photo here, or choose one", type=["jpg", "jpeg", "png", "webp"])
     cam = rear_camera(key="cls_cam") if st.toggle("Use camera") else None  # only mounted when switched on
     src = up or (io.BytesIO(cam) if cam else None)
-    if src is not None:
-        img, name = load_image(src), getattr(src, "name", "camera.jpg")
-    else:  # example: a real test-set photo (never seen in training)
-        img, name = load_image(os.path.join(ASSETS, "example.jpg")), "example.jpg"
+    try:
+        with st.spinner("Analysing the photo..."):
+            if src is not None:
+                img, name = load_image(src), getattr(src, "name", "camera.jpg")
+            else:  # example: a real test-set photo (never seen in training)
+                img, name = load_image(os.path.join(ASSETS, "example.jpg")), "example.jpg"
 
-    try:  # the visitor's browser comes from the request header (Streamlit >= 1.37)
-        browser = browser_label(st.context.headers.get("User-Agent"))
-    except Exception:
-        browser = "unknown browser"
+            try:  # the visitor's browser comes from the request header (Streamlit >= 1.37)
+                browser = browser_label(st.context.headers.get("User-Agent"))
+            except Exception:
+                browser = "unknown browser"
 
-    probs, q, ms = predict(img)
-    order = sorted(range(len(CLASSES)), key=lambda i: -probs[i])
-    top = order[0]
-    heat = Image.fromarray(gradcam_overlay(get_model(), img, top)[0])
-    pct = round(probs[top] * 100)
-    sure = (f'<b class="num">{pct}%</b> sure.' if probs[top] >= 0.5
-            else f'Only <b class="num">{pct}%</b> sure, so treat this as a guess.')
+            probs, q, ms = predict(img)
+            order = sorted(range(len(CLASSES)), key=lambda i: -probs[i])
+            top = order[0]
+            heat = Image.fromarray(gradcam_overlay(get_model(), img, top)[0])
+            pct = round(probs[top] * 100)
+            sure = (f'<b class="num">{pct}%</b> sure.' if probs[top] >= 0.5
+                    else f'Only <b class="num">{pct}%</b> sure, so treat this as a guess.')
 
+    except Exception as e:  # show the real reason: Streamlit Cloud redacts uncaught errors and leaves a blank page
+        logging.exception("classifier failed")
+        st.error(f"Could not analyse this photo: {error_text(e)}. Try a smaller JPG or PNG.")
+        st.stop()
     left, right = st.columns([1.4, 1], gap="large")
     with left:
         st.html(f"""<div class="lens"><div class="stage">

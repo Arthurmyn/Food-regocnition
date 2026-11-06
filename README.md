@@ -2,6 +2,9 @@
 
 Classes: burger, hotdog, pizza, sandwich, sushi (A1 dataset, 535 real images; split 375/81/79).
 
+> Подробный рассказ о всей работе с объяснением терминов: [docs/PROJECT_OVERVIEW.md](docs/PROJECT_OVERVIEW.md).
+> Ответы к защите: [docs/DEFENSE.md](docs/DEFENSE.md).
+
 ## Pipeline
 
 ```mermaid

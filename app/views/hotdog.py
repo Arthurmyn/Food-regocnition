@@ -2,6 +2,7 @@
 # Opens straight on the camera. Photo -> "Evaluating..." -> green Hotdog / red Not hotdog.
 import hashlib
 import io
+import logging
 import time
 
 import streamlit as st
@@ -10,7 +11,7 @@ from PIL import Image
 import theme
 import ui
 from rear_camera import rear_camera
-from core import CLASSES, DEVICE, HOTDOG, gradcam_overlay, get_model, load_image, nearest, predict, thumb
+from core import CLASSES, DEVICE, HOTDOG, error_text, gradcam_overlay, get_model, load_image, nearest, predict, thumb
 
 MIN_EVALUATING_S = 1.2  # how long the Evaluating... screen stays visible
 HOTDOG_THRESHOLD = 0.4  # P(hotdog) needed for a green check (validation F1 is flat for 0.35-0.5)
@@ -43,17 +44,23 @@ with mid:
                 'everything else.</p>')
         st.stop()
 
-    img = load_image(io.BytesIO(ss.hd_data))
-    b64 = ui.to_b64(img)
-    screen = st.empty()
-    key = hashlib.md5(ss.hd_data).hexdigest()
-    if ss.get("hd_done") != key:  # not evaluated yet (or an earlier run was interrupted): run it behind the spinner
-        screen.html(ui.screen_evaluating(b64))
-        started = time.perf_counter()
-        ss.hd_probs, ss.hd_q, ss.hd_ms = predict(img)
-        time.sleep(max(0.0, MIN_EVALUATING_S - (time.perf_counter() - started)))  # keep the spinner at least this long
-        ss.hd_done = key  # set last: only a finished evaluation counts
-    probs = ss.hd_probs
+    try:
+        img = load_image(io.BytesIO(ss.hd_data))
+        b64 = ui.to_b64(img)
+        screen = st.empty()
+        key = hashlib.md5(ss.hd_data).hexdigest()
+        if ss.get("hd_done") != key:  # not evaluated yet (or an earlier run was interrupted): run it behind the spinner
+            screen.html(ui.screen_evaluating(b64))
+            started = time.perf_counter()
+            ss.hd_probs, ss.hd_q, ss.hd_ms = predict(img)
+            time.sleep(max(0.0, MIN_EVALUATING_S - (time.perf_counter() - started)))  # keep the spinner at least this long
+            ss.hd_done = key  # set last: only a finished evaluation counts
+        probs = ss.hd_probs
+    except Exception as e:  # show the real reason instead of a blank page (Streamlit Cloud redacts uncaught errors)
+        logging.exception("hot dog evaluation failed")
+        st.error(f"Could not analyse this photo: {error_text(e)}. Try a smaller JPG or PNG.")
+        st.button("Try again", on_click=lambda: ss.update(hd_data=None, hd_n=ss.hd_n + 1))
+        st.stop()
     screen.html(ui.screen_result(b64, bool(probs[HOTDOG] >= HOTDOG_THRESHOLD)))
     st.html(f'<p style="text-align:center;color:var(--muted);font-size:13px;margin:.8rem 0">'
             f'Hot dog probability: <span class="mono">{probs[HOTDOG]:.0%}</span></p>')

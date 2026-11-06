@@ -17,3 +17,5 @@ fastapi
 uvicorn[standard]
 python-multipart
 httpx
+streamlit
+gdown

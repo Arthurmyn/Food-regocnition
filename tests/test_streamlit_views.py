@@ -55,3 +55,11 @@ def test_hotdog_shows_the_error_instead_of_a_blank_page_for_a_broken_photo():
     assert not at.exception                       # handled, not an uncaught crash
     assert any("Could not analyse this photo" in e.value for e in at.error)
     assert [b.label for b in at.button] == ["Try again"]
+
+
+def test_hotdog_information_panel_opens_with_heatmap_and_neighbours():
+    at = AppTest.from_file(os.path.join(ROOT, "app/views/hotdog.py"), default_timeout=120)
+    at.session_state["hd_data"] = open(EXAMPLE, "rb").read()
+    at.session_state["hd_info"] = True
+    at.run()
+    assert not at.exception and not at.warning

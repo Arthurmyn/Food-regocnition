@@ -37,6 +37,7 @@ input,textarea{caret-color:var(--accent)}
   text-wrap:balance}
 .lens .lede{font-size:1.125rem;line-height:1.55;color:var(--muted);max-width:60ch;margin:0 0 34px}
 .lens .lede b{color:var(--ink);font-weight:600}
+.lens .lede a{color:var(--red-ink);font-weight:600;text-underline-offset:3px}
 
 /* ---------- classifier ---------- */
 .cls{display:grid;grid-template-columns:minmax(0,1.4fr) minmax(0,1fr);gap:clamp(28px,4vw,64px);align-items:start}

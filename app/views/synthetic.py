@@ -38,4 +38,4 @@ with st.container(key="lens-page"):
       for an academic experiment. None is a real photograph.</span></div>
       <p class="lede" style="margin-top:30px">SD-Turbo generated <b class="num">{generated}</b> images and a classifier trained on real photos kept
       <b class="num">{accepted}</b> ({round(accepted / generated * 100)}%). Adding them to training did not improve accuracy on real test photos:
-      the change was within noise.</p>{"".join(sections)}</div>""")
+      the change was within noise. <a href="https://github.com/Arthurmyn/Food-regocnition/tree/main/results/a2/synthetic_gallery" target="_blank" rel="noopener">See all {generated} images with their prompts</a>.</p>{"".join(sections)}</div>""")

@@ -48,10 +48,17 @@ async function load(blob, name) {
 function stopLive() { stopCamera(stream); stream = null; $("live").hidden = true; $("camBtn").textContent = "Use camera"; }
 
 $("file").addEventListener("change", (e) => { const f = e.target.files[0]; e.target.value = ""; if (f) { stopLive(); load(f, f.name); } });
-const drop = $("drop");
-["dragenter", "dragover"].forEach((t) => document.addEventListener(t, (e) => { e.preventDefault(); drop.classList.add("over"); }));
-["dragleave", "drop"].forEach((t) => document.addEventListener(t, (e) => { e.preventDefault(); drop.classList.remove("over"); }));
-document.addEventListener("drop", (e) => { const f = e.dataTransfer.files[0]; if (f) { stopLive(); load(f, f.name); } });
+// Dragging a file anywhere over the page shows a frosted veil (feedback); a counter avoids flicker over child elements.
+let dragDepth = 0;
+const veil = $("veil");
+document.addEventListener("dragenter", (e) => { e.preventDefault(); dragDepth++; veil.classList.add("on"); });
+document.addEventListener("dragover", (e) => e.preventDefault());
+document.addEventListener("dragleave", () => { dragDepth = Math.max(0, dragDepth - 1); if (!dragDepth) veil.classList.remove("on"); });
+document.addEventListener("drop", (e) => {
+  e.preventDefault(); dragDepth = 0; veil.classList.remove("on");
+  const f = e.dataTransfer.files[0];
+  if (f) { stopLive(); load(f, f.name); }
+});
 
 $("camBtn").addEventListener("click", async () => {
   if (stream) return stopLive();

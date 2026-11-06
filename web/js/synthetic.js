@@ -6,7 +6,7 @@ const d = await (await fetch("/api/synthetic")).json();
 const pct = Math.round((d.accepted / d.generated) * 100);
 document.getElementById("lede").innerHTML =
   `SD-Turbo generated <b class="num">${d.generated}</b> images and a classifier trained on real photos kept ` +
-  `<b class="num">${d.accepted}</b> (${pct}%). Adding them to training did not improve accuracy on real test photos: the change was within noise. " +
+  `<b class="num">${d.accepted}</b> (${pct}%). Adding them to training did not improve accuracy on real test photos: the change was within noise. ` +
   `<a href="https://github.com/Arthurmyn/Food-regocnition/tree/main/results/a2/synthetic_gallery" target="_blank" rel="noopener">See all ${d.generated} images with their prompts</a>.`;
 document.getElementById("classes").innerHTML = Object.entries(d.classes).map(([c, v]) => `
   <section class="syn-class">

@@ -1,5 +1,5 @@
 // Classifier page: upload / drop / camera -> class, ranked probabilities, heatmap on the photo, nearest training photos.
-import { header, startCamera, stopCamera, snap, predict, explain, neighbors, esc, cap } from "./common.js";
+import { header, browserLabel, startCamera, stopCamera, snap, predict, explain, neighbors, esc, cap } from "./common.js";
 
 header("classifier");
 const $ = (id) => document.getElementById(id);
@@ -20,7 +20,7 @@ function readout(r) {
       <li class="${k === 0 ? "top" : ""}"><span>${esc(cap(r.classes[i]))}</span>
         <span class="bar"><i style="width:${(p * 100).toFixed(1)}%"></i></span>
         <span class="n">${Math.round(p * 100)}%</span></li>`).join("")}</ul>
-    <div class="facts"><span>${Math.round(r.latency_ms)} ms</span><span>${esc(r.device)}</span><span>${esc(r.model)}</span></div>`;
+    <div class="facts"><span>${Math.round(r.latency_ms)} ms</span><span>model on ${esc(r.device)}</span><span>${esc(browserLabel())}</span><span>${esc(r.model)}</span></div>`;
 }
 
 async function load(blob, name) {

@@ -6,6 +6,16 @@ export const cap = (s) => s.charAt(0).toUpperCase() + s.slice(1);
 // authored mark: a sausage longer than its bun
 const MARK = `<svg width="28" height="28" viewBox="0 0 28 28" aria-hidden="true"><rect x="3" y="7" width="22" height="14" rx="7" fill="#F7B500"/><rect x="0.75" y="11" width="26.5" height="6.5" rx="3.25" fill="#D62828"/></svg>`;
 
+// Browser + OS from the User-Agent (same rules as app/env_info.py)
+export function browserLabel(ua = navigator.userAgent) {
+  const pick = (list) => list.map(([n, re]) => { const m = ua.match(re); return m ? [n, m[1]] : null; }).find(Boolean);
+  const b = pick([["Edge", /Edg\/(\d+)/], ["Firefox", /(?:Firefox|FxiOS)\/(\d+)/], ["Chrome", /(?:Chrome|CriOS)\/(\d+)/],
+    ["Safari", /Version\/(\d+)[\d.]* (?:Mobile\/\S+ )?Safari/]]);
+  const os = [["iOS", /iPhone|iPad|iPod/], ["Android", /Android/], ["Windows", /Windows/], ["macOS", /Macintosh|Mac OS X/], ["Linux", /Linux|X11/]]
+    .find(([, re]) => re.test(ua));
+  return `${b ? `${b[0]} ${b[1]}` : "unknown browser"} on ${os ? os[0] : "unknown OS"}`;
+}
+
 export function header(active) {
   const links = [["/classifier", "Classifier", "classifier"], ["/", "Hot Dog or Not", "hotdog"], ["/synthetic", "Synthetic Data", "synthetic"]];
   document.getElementById("header").innerHTML = `

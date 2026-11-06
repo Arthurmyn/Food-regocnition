@@ -38,19 +38,24 @@ def thumb(path, label):
     return os.path.join(ASSETS, "train", CLASSES[label], name)
 
 
-def predict(img, runs=10):
-    """Class probabilities, feature vector and mean latency (ms) for a PIL image."""
+def predict(img, runs=10, budget_s=0.8):
+    """Class probabilities, feature vector and mean latency (ms) for a PIL image.
+
+    Latency is the mean of up to `runs` warm forward passes; on a slow CPU the loop stops once `budget_s` is spent
+    (after at least 3 passes), so a prediction never waits long just to be timed."""
     model = get_model()
     x = preprocess(img).to(DEVICE)
     with torch.no_grad():
         model(x)  # warm-up
-        times = []
-        for _ in range(runs):
+        times, spent = [], time.perf_counter()
+        for i in range(runs):
             t = time.perf_counter()
             logits = model(x)
             if DEVICE.type == "mps":
                 torch.mps.synchronize()
             times.append((time.perf_counter() - t) * 1000)
+            if i >= 2 and time.perf_counter() - spent > budget_s:
+                break
         probs = torch.softmax(logits, 1)[0].cpu().numpy()
         q = embed(model, x).cpu().numpy()[0]
     return probs, q / (np.linalg.norm(q) + 1e-12), float(np.mean(times))

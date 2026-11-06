@@ -49,3 +49,25 @@ def test_retrieval_index_is_consistent():
     thumbs = os.path.join(ROOT, "web", "assets", "train")
     assert all(os.path.exists(os.path.join(thumbs, CLASSES[l], os.path.splitext(os.path.basename(str(p)))[0] + ".jpg"))
                for p, l in zip(paths, labels))                              # every neighbour thumbnail ships with the repo
+
+
+def test_gradcam_without_backward_pass_equals_textbook_gradcam():
+    """The app computes Grad-CAM analytically (GAP + Linear head), because the autograd backward pass crashed on
+    Streamlit Cloud. It must agree with the textbook gradient version for every class and for both checkpoints."""
+    from common import A1_CHECKPOINT
+    from explain import gradcam_heatmap, gradcam_heatmap_autograd
+    x = preprocess(Image.open(EXAMPLE)).to(DEVICE)
+    for path in (DEPLOY_CHECKPOINT, A1_CHECKPOINT):
+        m = load_model(path)
+        for c in range(len(CLASSES)):
+            fast, _ = gradcam_heatmap(m, x, c)
+            ref, _ = gradcam_heatmap_autograd(m, x, c)
+            assert np.abs(fast - ref).max() < 1e-3
+
+
+def test_gradcam_does_not_need_autograd(model):
+    from explain import gradcam_heatmap
+    x = preprocess(Image.open(EXAMPLE)).to(DEVICE)
+    with torch.inference_mode():                    # no autograd at all: the analytic version must still work
+        heat, _ = gradcam_heatmap(model, x, 0)
+    assert heat.shape == (224, 224)

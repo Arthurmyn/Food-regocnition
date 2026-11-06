@@ -166,7 +166,7 @@ Input photo and what the app returns for it (`web/assets/example.jpg` is a real 
 
 ![Synthetic page](docs/screenshots/synthetic.jpg)
 
-Grad-CAM examples (one real test photo per class) and nearest-neighbour retrieval:
+Grad-CAM examples (one real test photo per class; the pizza photo is misclassified as sandwich, a useful failure case) and nearest-neighbour retrieval:
 
 ![Grad-CAM examples](results/a2/gradcam_examples.png)
 ![Nearest neighbours](results/a2/nearest_neighbors.png)

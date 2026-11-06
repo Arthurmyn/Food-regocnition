@@ -70,3 +70,11 @@ def nearest(q, k=5):
 def load_image(file):
     """Open an upload/camera file as RGB with the EXIF orientation applied (phone photos are stored rotated)."""
     return ImageOps.exif_transpose(Image.open(file)).convert("RGB")
+
+
+def error_text(exc):
+    """Short, readable reason for a failed analysis (shown to the visitor instead of a blank page)."""
+    from PIL import UnidentifiedImageError
+    if isinstance(exc, UnidentifiedImageError):
+        return "this file is not a readable image"
+    return f"{type(exc).__name__}: {str(exc)[:160]}"

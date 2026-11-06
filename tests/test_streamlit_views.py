@@ -46,3 +46,12 @@ def test_predict_stops_timing_when_the_time_budget_is_spent():
     finally:
         handle.remove()
     assert len(calls) == 1 + 3          # one warm-up pass + the minimum of three timed passes
+
+
+def test_hotdog_shows_the_error_instead_of_a_blank_page_for_a_broken_photo():
+    at = AppTest.from_file(os.path.join(ROOT, "app/views/hotdog.py"), default_timeout=120)
+    at.session_state["hd_data"] = b"this is not an image"
+    at.run()
+    assert not at.exception                       # handled, not an uncaught crash
+    assert any("Could not analyse this photo" in e.value for e in at.error)
+    assert [b.label for b in at.button] == ["Try again"]

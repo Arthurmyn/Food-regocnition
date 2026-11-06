@@ -76,12 +76,17 @@ with mid:
               icon=":material/info:", width="stretch")
 
 if ss.hd_info:
-    best = int(probs.argmax())
-    cam = gradcam_overlay(get_model(), img, HOTDOG)[0]
-    near = "".join(
-        f'<figure>{theme.img_tag(Image.open(thumb(p, l)), max_side=256)}'
-        f'<figcaption><span>{CLASSES[l].capitalize()}</span><span>{s:.2f}</span></figcaption></figure>'
-        for p, l, s in nearest(ss.hd_q))
+    try:
+        best = int(probs.argmax())
+        cam = gradcam_overlay(get_model(), img, HOTDOG)[0]
+        near = "".join(
+            f'<figure>{theme.img_tag(Image.open(thumb(p, l)), max_side=256)}'
+            f'<figcaption><span>{CLASSES[l].capitalize()}</span><span>{s:.2f}</span></figcaption></figure>'
+            for p, l, s in nearest(ss.hd_q))
+    except Exception as e:  # the verdict above stays visible; only the extra information is skipped
+        logging.exception("hot dog information panel failed")
+        st.warning(f"The extra information could not be built: {error_text(e)}")
+        st.stop()
     st.html(f"""
     <div class="fl-card" style="margin-top:1.5rem">
       <div class="fl-pad">

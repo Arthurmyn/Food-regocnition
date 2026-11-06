@@ -119,7 +119,12 @@ HEADER_CSS = """
 .st-key-fl-header [data-testid="stPageLink"] a{position:relative;padding:8px 12px 15px!important;background:transparent!important;
   border-radius:0!important;min-height:0}
 .st-key-fl-header [data-testid="stPageLink"] a p{font-size:15px;font-weight:500;color:var(--muted);margin:0;white-space:nowrap}
-.st-key-fl-header [data-testid="stPageLink"] a:hover p{color:var(--ink)}
+.st-key-fl-header [data-testid="stPageLink"] a::after{content:"";position:absolute;left:12px;right:12px;bottom:-1px;height:3px;
+  background:#DDD2C1;border-radius:3px 3px 0 0;transform:scaleX(0);transition:transform .2s var(--ease-out)}
+@media (hover:hover) and (pointer:fine){
+  .st-key-fl-header [data-testid="stPageLink"] a:hover p{color:var(--ink)}
+  .st-key-fl-header [data-testid="stPageLink"] a:hover::after{transform:scaleX(1)}
+}
 .st-key-fl-header > *:last-child{margin-left:auto!important}
 .st-key-lens-page{width:100%;max-width:1240px;margin:0 auto}
 .st-key-lens-page .readout{padding-top:0}
@@ -161,7 +166,7 @@ def header(pages, current):
     st.html(f"""<style>
     .st-key-fl-nav-{active} a p{{color:var(--ink)!important;font-weight:600!important}}
     .st-key-fl-nav-{active} a::after{{content:"";position:absolute;left:12px;right:12px;bottom:-1px;height:3px;
-      background:var(--accent);border-radius:3px 3px 0 0}}</style>""")
+      background:var(--accent)!important;border-radius:3px 3px 0 0;transform:scaleX(1)!important}}</style>""")
 
 
 def footer(device, ms=None):

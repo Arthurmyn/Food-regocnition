@@ -9,6 +9,7 @@ from PIL import Image
 import theme
 import ui
 from core import ASSETS, CLASSES, DEVICE, MODEL_PATH, HOTDOG, gradcam_overlay, get_model, load_image, nearest, predict, thumb
+from env_info import browser_label
 from rear_camera import rear_camera
 
 theme.apply()
@@ -31,6 +32,11 @@ with st.container(key="lens-page"):
     else:  # example: a real test-set photo (never seen in training)
         img, name = load_image(os.path.join(ASSETS, "example.jpg")), "example.jpg"
 
+    try:  # the visitor's browser comes from the request header (Streamlit >= 1.37)
+        browser = browser_label(st.context.headers.get("User-Agent"))
+    except Exception:
+        browser = "unknown browser"
+
     probs, q, ms = predict(img)
     order = sorted(range(len(CLASSES)), key=lambda i: -probs[i])
     top = order[0]
@@ -52,7 +58,7 @@ with st.container(key="lens-page"):
             f'<li class="{"top" if k == 0 else ""}"><span>{esc(cap(CLASSES[i]))}</span><span class="bar"><i style="width:{probs[i] * 100:.1f}%"></i></span>'
             f'<span class="n">{round(probs[i] * 100)}%</span></li>' for k, i in enumerate(order))
         st.html(f"""<div class="lens readout"><h2>{esc(cap(CLASSES[top]))}</h2><p class="sure">{sure}</p><ul class="rank">{rows}</ul>
-          <div class="facts"><span>{round(ms)} ms</span><span>{esc(str(DEVICE))}</span><span>EfficientNet-B0 (frozen ImageNet features + linear head)</span></div></div>""")
+          <div class="facts"><span>{round(ms)} ms</span><span>model on {esc(str(DEVICE))}</span><span>{esc(browser)}</span><span>EfficientNet-B0 (frozen ImageNet features + linear head)</span></div></div>""")
 
     near = "".join(
         f'<figure><img src="{uri(Image.open(thumb(p, l)), 300)}" alt="{esc(CLASSES[l])} training photo">'

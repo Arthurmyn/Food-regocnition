@@ -31,18 +31,22 @@ def _thumb_url(path, label):
     return f"/assets/train/{CLASSES[label]}/{name}"
 
 
-def predict(img, runs=10, k=5):
-    """Class probabilities, mean latency (ms) and the k nearest training photos for a PIL image."""
+def predict(img, runs=10, k=5, budget_s=0.8):
+    """Class probabilities, mean latency (ms) and the k nearest training photos for a PIL image.
+
+    Latency is the mean of up to `runs` warm passes; it stops after `budget_s` seconds (at least 3 passes) on slow CPUs."""
     x = preprocess(img).to(DEVICE)
     with _lock, torch.no_grad():
         _model(x)  # warm-up
-        times = []
-        for _ in range(runs):
+        times, spent = [], time.perf_counter()
+        for i in range(runs):
             t = time.perf_counter()
             logits = _model(x)
             if DEVICE.type == "mps":
                 torch.mps.synchronize()
             times.append((time.perf_counter() - t) * 1000)
+            if i >= 2 and time.perf_counter() - spent > budget_s:
+                break
         probs = torch.softmax(logits, 1)[0].cpu().numpy()
         q = embed(_model, x).cpu().numpy()[0]
     q = q / (np.linalg.norm(q) + 1e-12)

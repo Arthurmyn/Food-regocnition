@@ -2,6 +2,30 @@
 
 Classes: burger, hotdog, pizza, sandwich, sushi (A1 dataset, 535 real images; split 375/81/79).
 
+## Pipeline
+
+```mermaid
+flowchart LR
+  A["535 real photos, 5 classes"] --> B["Fixed split 375 / 81 / 79 (seed 42)"]
+  B --> C["A1 baselines: HOG+SVM, fine-tuned EfficientNet-B0"]
+  B --> D["SD-Turbo: 200 synthetic images"]
+  D --> E["Filter with the A1 classifier: 139 kept"]
+  B --> F["A2 ablation: EfficientNet-B0, 5 seeds x 4 conditions"]
+  E --> F
+  B --> G["DEPLOYED: frozen ImageNet EfficientNet-B0 + logistic-regression head"]
+  G --> H["Retrieval index: nearest training photos"]
+  G --> I["Grad-CAM heatmap"]
+  G --> J["App: prediction, heatmap, neighbours, latency, device and browser"]
+  H --> J
+  I --> J
+```
+
+How it works: a photo is resized and centre-cropped to 224 x 224, an ImageNet-pretrained EfficientNet-B0 turns it into a
+1280-number feature vector, and a small logistic-regression layer turns that into five class probabilities. The same
+features rank the real training photos by cosine similarity (nearest neighbours). Grad-CAM weights the last convolutional
+feature maps by their gradient for the predicted class to produce the heatmap. Synthetic images are used for training
+experiments only; validation and test sets are always real photos.
+
 ## Layout
 
 ```

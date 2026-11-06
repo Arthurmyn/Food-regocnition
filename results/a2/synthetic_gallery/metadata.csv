@@ -1,0 +1,201 @@
+class,file,prompt,seed
+burger,syn_burger_000.png,"a chicken burger with sauce, top-down view, on a white plate, amateur smartphone food photo, realistic",97327825
+burger,syn_burger_001.png,"a burger with fries and a drink, top-down view, on a wooden table, amateur smartphone food photo, realistic",105679867
+burger,syn_burger_002.png,"a homemade burger on a wooden board, side view, on a white plate, amateur smartphone food photo, realistic",33086296
+burger,syn_burger_003.png,"a hamburger with a beef patty, cheese, lettuce and tomato in a sesame bun, 45 degree angle, under bright natural window light, amateur smartphone food photo, realistic",661227071
+burger,syn_burger_004.png,"a chicken burger with sauce, side view, on a wooden table, amateur smartphone food photo, realistic",196592080
+burger,syn_burger_005.png,"a hamburger with a beef patty, cheese, lettuce and tomato in a sesame bun, top-down view, under bright natural window light, amateur smartphone food photo, realistic",945397916
+burger,syn_burger_006.png,"a double cheeseburger, top-down view, under bright natural window light, amateur smartphone food photo, realistic",73625667
+burger,syn_burger_007.png,"a burger with fries and a drink, top-down view, on a white plate, amateur smartphone food photo, realistic",289465224
+burger,syn_burger_008.png,"a burger with fries and a drink, top-down view, on a paper wrapper, amateur smartphone food photo, realistic",516508871
+burger,syn_burger_009.png,"a homemade burger on a wooden board, 45 degree angle, on a kitchen counter, amateur smartphone food photo, realistic",703818160
+burger,syn_burger_010.png,"a double cheeseburger, close-up, on a white plate, amateur smartphone food photo, realistic",545570289
+burger,syn_burger_011.png,"a hamburger with a beef patty, cheese, lettuce and tomato in a sesame bun, top-down view, outdoors at a picnic table, amateur smartphone food photo, realistic",154370168
+burger,syn_burger_012.png,"a chicken burger with sauce, close-up, in a restaurant, amateur smartphone food photo, realistic",58170178
+burger,syn_burger_013.png,"a hamburger with a beef patty, cheese, lettuce and tomato in a sesame bun, low angle shot, under bright natural window light, amateur smartphone food photo, realistic",176097127
+burger,syn_burger_014.png,"a hamburger with a beef patty, cheese, lettuce and tomato in a sesame bun, low angle shot, on a kitchen counter, amateur smartphone food photo, realistic",154882668
+burger,syn_burger_015.png,"a hamburger with a beef patty, cheese, lettuce and tomato in a sesame bun, 45 degree angle, on a wooden table, amateur smartphone food photo, realistic",568743039
+burger,syn_burger_016.png,"a double cheeseburger, 45 degree angle, under bright natural window light, amateur smartphone food photo, realistic",42509034
+burger,syn_burger_017.png,"a chicken burger with sauce, 45 degree angle, on a white plate, amateur smartphone food photo, realistic",190420638
+burger,syn_burger_018.png,"a homemade burger on a wooden board, side view, on a paper wrapper, amateur smartphone food photo, realistic",910092501
+burger,syn_burger_019.png,"a double cheeseburger, close-up, on a white plate, amateur smartphone food photo, realistic",604630635
+burger,syn_burger_020.png,"a chicken burger with sauce, 45 degree angle, under bright natural window light, amateur smartphone food photo, realistic",366905947
+burger,syn_burger_021.png,"a burger with fries and a drink, close-up, under bright natural window light, amateur smartphone food photo, realistic",48671961
+burger,syn_burger_022.png,"a chicken burger with sauce, low angle shot, in a restaurant, amateur smartphone food photo, realistic",472013038
+burger,syn_burger_023.png,"a burger with fries and a drink, close-up, on a paper wrapper, amateur smartphone food photo, realistic",295323031
+burger,syn_burger_024.png,"a hamburger with a beef patty, cheese, lettuce and tomato in a sesame bun, side view, in dim warm lighting, amateur smartphone food photo, realistic",468215633
+burger,syn_burger_025.png,"a hamburger with a beef patty, cheese, lettuce and tomato in a sesame bun, low angle shot, on a wooden table, amateur smartphone food photo, realistic",890584186
+burger,syn_burger_026.png,"a chicken burger with sauce, close-up, on a paper wrapper, amateur smartphone food photo, realistic",688314718
+burger,syn_burger_027.png,"a double cheeseburger, 45 degree angle, on a wooden table, amateur smartphone food photo, realistic",754474298
+burger,syn_burger_028.png,"a double cheeseburger, low angle shot, on a paper wrapper, amateur smartphone food photo, realistic",166265152
+burger,syn_burger_029.png,"a homemade burger on a wooden board, close-up, on a wooden table, amateur smartphone food photo, realistic",84280250
+burger,syn_burger_030.png,"a chicken burger with sauce, side view, on a white plate, amateur smartphone food photo, realistic",960496182
+burger,syn_burger_031.png,"a homemade burger on a wooden board, top-down view, on a kitchen counter, amateur smartphone food photo, realistic",544080912
+burger,syn_burger_032.png,"a hamburger with a beef patty, cheese, lettuce and tomato in a sesame bun, 45 degree angle, on a paper wrapper, amateur smartphone food photo, realistic",494816919
+burger,syn_burger_033.png,"a hamburger with a beef patty, cheese, lettuce and tomato in a sesame bun, low angle shot, on a paper wrapper, amateur smartphone food photo, realistic",919667083
+burger,syn_burger_034.png,"a hamburger with a beef patty, cheese, lettuce and tomato in a sesame bun, close-up, on a kitchen counter, amateur smartphone food photo, realistic",108762161
+burger,syn_burger_035.png,"a chicken burger with sauce, side view, under bright natural window light, amateur smartphone food photo, realistic",537426892
+burger,syn_burger_036.png,"a double cheeseburger, 45 degree angle, on a kitchen counter, amateur smartphone food photo, realistic",553013735
+burger,syn_burger_037.png,"a chicken burger with sauce, side view, on a kitchen counter, amateur smartphone food photo, realistic",324030654
+burger,syn_burger_038.png,"a hamburger with a beef patty, cheese, lettuce and tomato in a sesame bun, 45 degree angle, in a restaurant, amateur smartphone food photo, realistic",536427781
+burger,syn_burger_039.png,"a burger with fries and a drink, close-up, outdoors at a picnic table, amateur smartphone food photo, realistic",148959001
+hotdog,syn_hotdog_000.png,"a grilled sausage hot dog with onions, top-down view, in a restaurant, amateur smartphone food photo, realistic",993582941
+hotdog,syn_hotdog_001.png,"a grilled sausage hot dog with onions, low angle shot, on a wooden table, amateur smartphone food photo, realistic",766435583
+hotdog,syn_hotdog_002.png,"a chili cheese hot dog, side view, on a white plate, amateur smartphone food photo, realistic",717517187
+hotdog,syn_hotdog_003.png,"a hot dog with mustard and ketchup in a bun, top-down view, in a restaurant, amateur smartphone food photo, realistic",983043146
+hotdog,syn_hotdog_004.png,"a grilled sausage hot dog with onions, top-down view, in dim warm lighting, amateur smartphone food photo, realistic",420306725
+hotdog,syn_hotdog_005.png,"a chili cheese hot dog, side view, in dim warm lighting, amateur smartphone food photo, realistic",938757204
+hotdog,syn_hotdog_006.png,"a chili cheese hot dog, low angle shot, on a paper wrapper, amateur smartphone food photo, realistic",453158638
+hotdog,syn_hotdog_007.png,"a chili cheese hot dog, low angle shot, in a restaurant, amateur smartphone food photo, realistic",900620049
+hotdog,syn_hotdog_008.png,"a street-vendor hot dog, top-down view, on a paper wrapper, amateur smartphone food photo, realistic",298522076
+hotdog,syn_hotdog_009.png,"two hot dogs on a tray, close-up, on a paper wrapper, amateur smartphone food photo, realistic",564574011
+hotdog,syn_hotdog_010.png,"a hot dog with mustard and ketchup in a bun, close-up, on a paper wrapper, amateur smartphone food photo, realistic",229658153
+hotdog,syn_hotdog_011.png,"a chili cheese hot dog, low angle shot, in dim warm lighting, amateur smartphone food photo, realistic",56370322
+hotdog,syn_hotdog_012.png,"a chili cheese hot dog, close-up, on a kitchen counter, amateur smartphone food photo, realistic",834176104
+hotdog,syn_hotdog_013.png,"two hot dogs on a tray, side view, in dim warm lighting, amateur smartphone food photo, realistic",330623540
+hotdog,syn_hotdog_014.png,"a hot dog with mustard and ketchup in a bun, top-down view, under bright natural window light, amateur smartphone food photo, realistic",424118057
+hotdog,syn_hotdog_015.png,"a chili cheese hot dog, close-up, under bright natural window light, amateur smartphone food photo, realistic",199264079
+hotdog,syn_hotdog_016.png,"two hot dogs on a tray, close-up, in a restaurant, amateur smartphone food photo, realistic",302001063
+hotdog,syn_hotdog_017.png,"a street-vendor hot dog, 45 degree angle, outdoors at a picnic table, amateur smartphone food photo, realistic",221263814
+hotdog,syn_hotdog_018.png,"a grilled sausage hot dog with onions, low angle shot, under bright natural window light, amateur smartphone food photo, realistic",863054233
+hotdog,syn_hotdog_019.png,"two hot dogs on a tray, top-down view, under bright natural window light, amateur smartphone food photo, realistic",709428769
+hotdog,syn_hotdog_020.png,"a hot dog with mustard and ketchup in a bun, top-down view, outdoors at a picnic table, amateur smartphone food photo, realistic",852615851
+hotdog,syn_hotdog_021.png,"two hot dogs on a tray, top-down view, in a restaurant, amateur smartphone food photo, realistic",953740982
+hotdog,syn_hotdog_022.png,"a street-vendor hot dog, 45 degree angle, outdoors at a picnic table, amateur smartphone food photo, realistic",809150644
+hotdog,syn_hotdog_023.png,"a chili cheese hot dog, 45 degree angle, outdoors at a picnic table, amateur smartphone food photo, realistic",604357992
+hotdog,syn_hotdog_024.png,"a chili cheese hot dog, low angle shot, on a kitchen counter, amateur smartphone food photo, realistic",546707953
+hotdog,syn_hotdog_025.png,"a chili cheese hot dog, top-down view, on a kitchen counter, amateur smartphone food photo, realistic",364679492
+hotdog,syn_hotdog_026.png,"a street-vendor hot dog, 45 degree angle, outdoors at a picnic table, amateur smartphone food photo, realistic",491806449
+hotdog,syn_hotdog_027.png,"a chili cheese hot dog, top-down view, on a wooden table, amateur smartphone food photo, realistic",884911992
+hotdog,syn_hotdog_028.png,"a grilled sausage hot dog with onions, 45 degree angle, outdoors at a picnic table, amateur smartphone food photo, realistic",147192076
+hotdog,syn_hotdog_029.png,"a hot dog with mustard and ketchup in a bun, close-up, on a white plate, amateur smartphone food photo, realistic",713649983
+hotdog,syn_hotdog_030.png,"a hot dog with mustard and ketchup in a bun, side view, in a restaurant, amateur smartphone food photo, realistic",336090445
+hotdog,syn_hotdog_031.png,"a street-vendor hot dog, 45 degree angle, in dim warm lighting, amateur smartphone food photo, realistic",975750066
+hotdog,syn_hotdog_032.png,"a street-vendor hot dog, top-down view, on a paper wrapper, amateur smartphone food photo, realistic",280702896
+hotdog,syn_hotdog_033.png,"two hot dogs on a tray, low angle shot, on a kitchen counter, amateur smartphone food photo, realistic",373390682
+hotdog,syn_hotdog_034.png,"a street-vendor hot dog, top-down view, on a white plate, amateur smartphone food photo, realistic",733098753
+hotdog,syn_hotdog_035.png,"a street-vendor hot dog, 45 degree angle, on a kitchen counter, amateur smartphone food photo, realistic",174519871
+hotdog,syn_hotdog_036.png,"two hot dogs on a tray, close-up, in a restaurant, amateur smartphone food photo, realistic",942584129
+hotdog,syn_hotdog_037.png,"a street-vendor hot dog, low angle shot, on a wooden table, amateur smartphone food photo, realistic",156263691
+hotdog,syn_hotdog_038.png,"a street-vendor hot dog, side view, in a restaurant, amateur smartphone food photo, realistic",981429020
+hotdog,syn_hotdog_039.png,"a street-vendor hot dog, low angle shot, in dim warm lighting, amateur smartphone food photo, realistic",916092167
+pizza,syn_pizza_000.png,"a slice of cheese pizza being lifted, side view, under bright natural window light, amateur smartphone food photo, realistic",43901488
+pizza,syn_pizza_001.png,"a slice of cheese pizza being lifted, top-down view, outdoors at a picnic table, amateur smartphone food photo, realistic",819156618
+pizza,syn_pizza_002.png,"a whole pizza on a wooden peel, top-down view, on a wooden table, amateur smartphone food photo, realistic",337324503
+pizza,syn_pizza_003.png,"a margherita pizza with basil, low angle shot, on a kitchen counter, amateur smartphone food photo, realistic",371714728
+pizza,syn_pizza_004.png,"a vegetable pizza, close-up, under bright natural window light, amateur smartphone food photo, realistic",56315146
+pizza,syn_pizza_005.png,"a pepperoni pizza, close-up, on a wooden table, amateur smartphone food photo, realistic",889430660
+pizza,syn_pizza_006.png,"a slice of cheese pizza being lifted, close-up, outdoors at a picnic table, amateur smartphone food photo, realistic",158799969
+pizza,syn_pizza_007.png,"a whole pizza on a wooden peel, side view, on a white plate, amateur smartphone food photo, realistic",927987961
+pizza,syn_pizza_008.png,"a slice of cheese pizza being lifted, low angle shot, outdoors at a picnic table, amateur smartphone food photo, realistic",445603956
+pizza,syn_pizza_009.png,"a margherita pizza with basil, top-down view, on a white plate, amateur smartphone food photo, realistic",227923948
+pizza,syn_pizza_010.png,"a margherita pizza with basil, low angle shot, in a restaurant, amateur smartphone food photo, realistic",538863321
+pizza,syn_pizza_011.png,"a margherita pizza with basil, 45 degree angle, on a white plate, amateur smartphone food photo, realistic",981387325
+pizza,syn_pizza_012.png,"a vegetable pizza, close-up, outdoors at a picnic table, amateur smartphone food photo, realistic",641839628
+pizza,syn_pizza_013.png,"a slice of cheese pizza being lifted, 45 degree angle, in dim warm lighting, amateur smartphone food photo, realistic",438302409
+pizza,syn_pizza_014.png,"a slice of cheese pizza being lifted, side view, on a paper wrapper, amateur smartphone food photo, realistic",9389986
+pizza,syn_pizza_015.png,"a slice of cheese pizza being lifted, low angle shot, on a paper wrapper, amateur smartphone food photo, realistic",129357465
+pizza,syn_pizza_016.png,"a vegetable pizza, low angle shot, on a white plate, amateur smartphone food photo, realistic",928869361
+pizza,syn_pizza_017.png,"a margherita pizza with basil, low angle shot, outdoors at a picnic table, amateur smartphone food photo, realistic",576810195
+pizza,syn_pizza_018.png,"a margherita pizza with basil, 45 degree angle, on a paper wrapper, amateur smartphone food photo, realistic",389612771
+pizza,syn_pizza_019.png,"a slice of cheese pizza being lifted, side view, under bright natural window light, amateur smartphone food photo, realistic",978148887
+pizza,syn_pizza_020.png,"a margherita pizza with basil, top-down view, in dim warm lighting, amateur smartphone food photo, realistic",256654237
+pizza,syn_pizza_021.png,"a margherita pizza with basil, close-up, on a paper wrapper, amateur smartphone food photo, realistic",895465071
+pizza,syn_pizza_022.png,"a margherita pizza with basil, 45 degree angle, in dim warm lighting, amateur smartphone food photo, realistic",569213004
+pizza,syn_pizza_023.png,"a whole pizza on a wooden peel, low angle shot, under bright natural window light, amateur smartphone food photo, realistic",889137266
+pizza,syn_pizza_024.png,"a whole pizza on a wooden peel, low angle shot, under bright natural window light, amateur smartphone food photo, realistic",777612309
+pizza,syn_pizza_025.png,"a slice of cheese pizza being lifted, low angle shot, on a wooden table, amateur smartphone food photo, realistic",766133064
+pizza,syn_pizza_026.png,"a vegetable pizza, close-up, in a restaurant, amateur smartphone food photo, realistic",113918404
+pizza,syn_pizza_027.png,"a whole pizza on a wooden peel, close-up, on a wooden table, amateur smartphone food photo, realistic",586644335
+pizza,syn_pizza_028.png,"a vegetable pizza, side view, on a paper wrapper, amateur smartphone food photo, realistic",256595003
+pizza,syn_pizza_029.png,"a pepperoni pizza, 45 degree angle, in dim warm lighting, amateur smartphone food photo, realistic",315238400
+pizza,syn_pizza_030.png,"a vegetable pizza, 45 degree angle, in dim warm lighting, amateur smartphone food photo, realistic",588462677
+pizza,syn_pizza_031.png,"a margherita pizza with basil, low angle shot, under bright natural window light, amateur smartphone food photo, realistic",725574704
+pizza,syn_pizza_032.png,"a whole pizza on a wooden peel, 45 degree angle, under bright natural window light, amateur smartphone food photo, realistic",986024695
+pizza,syn_pizza_033.png,"a vegetable pizza, top-down view, under bright natural window light, amateur smartphone food photo, realistic",92204678
+pizza,syn_pizza_034.png,"a pepperoni pizza, side view, in a restaurant, amateur smartphone food photo, realistic",652517811
+pizza,syn_pizza_035.png,"a slice of cheese pizza being lifted, side view, in dim warm lighting, amateur smartphone food photo, realistic",291513466
+pizza,syn_pizza_036.png,"a margherita pizza with basil, 45 degree angle, on a white plate, amateur smartphone food photo, realistic",169817362
+pizza,syn_pizza_037.png,"a slice of cheese pizza being lifted, low angle shot, on a wooden table, amateur smartphone food photo, realistic",48579883
+pizza,syn_pizza_038.png,"a pepperoni pizza, 45 degree angle, in dim warm lighting, amateur smartphone food photo, realistic",347015007
+pizza,syn_pizza_039.png,"a slice of cheese pizza being lifted, 45 degree angle, in dim warm lighting, amateur smartphone food photo, realistic",767479922
+sandwich,syn_sandwich_000.png,"a grilled panini sandwich, side view, in dim warm lighting, amateur smartphone food photo, realistic",423656247
+sandwich,syn_sandwich_001.png,"a club sandwich cut in half with toothpicks, 45 degree angle, on a paper wrapper, amateur smartphone food photo, realistic",976970784
+sandwich,syn_sandwich_002.png,"a submarine sandwich, 45 degree angle, on a kitchen counter, amateur smartphone food photo, realistic",167593957
+sandwich,syn_sandwich_003.png,"a submarine sandwich, side view, under bright natural window light, amateur smartphone food photo, realistic",651549504
+sandwich,syn_sandwich_004.png,"a deli sandwich on a baguette, close-up, outdoors at a picnic table, amateur smartphone food photo, realistic",561679254
+sandwich,syn_sandwich_005.png,"a sliced sandwich on sliced bread with lettuce and tomato, close-up, in dim warm lighting, amateur smartphone food photo, realistic",278808147
+sandwich,syn_sandwich_006.png,"a sandwich with fries on the side, low angle shot, under bright natural window light, amateur smartphone food photo, realistic",338383568
+sandwich,syn_sandwich_007.png,"a toasted ham and cheese sandwich, 45 degree angle, in a restaurant, amateur smartphone food photo, realistic",175999567
+sandwich,syn_sandwich_008.png,"a deli sandwich on a baguette, side view, on a white plate, amateur smartphone food photo, realistic",249707201
+sandwich,syn_sandwich_009.png,"a grilled panini sandwich, low angle shot, outdoors at a picnic table, amateur smartphone food photo, realistic",674498096
+sandwich,syn_sandwich_010.png,"a grilled panini sandwich, side view, in dim warm lighting, amateur smartphone food photo, realistic",985674226
+sandwich,syn_sandwich_011.png,"a deli sandwich on a baguette, top-down view, in dim warm lighting, amateur smartphone food photo, realistic",837416657
+sandwich,syn_sandwich_012.png,"a club sandwich cut in half with toothpicks, top-down view, on a wooden table, amateur smartphone food photo, realistic",876599561
+sandwich,syn_sandwich_013.png,"a toasted ham and cheese sandwich, close-up, under bright natural window light, amateur smartphone food photo, realistic",407704536
+sandwich,syn_sandwich_014.png,"a submarine sandwich, side view, on a paper wrapper, amateur smartphone food photo, realistic",893781128
+sandwich,syn_sandwich_015.png,"a grilled panini sandwich, 45 degree angle, under bright natural window light, amateur smartphone food photo, realistic",865058227
+sandwich,syn_sandwich_016.png,"a sandwich with fries on the side, top-down view, on a paper wrapper, amateur smartphone food photo, realistic",866970648
+sandwich,syn_sandwich_017.png,"a submarine sandwich, top-down view, in a restaurant, amateur smartphone food photo, realistic",153334056
+sandwich,syn_sandwich_018.png,"a toasted ham and cheese sandwich, close-up, in dim warm lighting, amateur smartphone food photo, realistic",190120896
+sandwich,syn_sandwich_019.png,"a grilled panini sandwich, side view, on a paper wrapper, amateur smartphone food photo, realistic",100698263
+sandwich,syn_sandwich_020.png,"a deli sandwich on a baguette, low angle shot, outdoors at a picnic table, amateur smartphone food photo, realistic",645412769
+sandwich,syn_sandwich_021.png,"a toasted ham and cheese sandwich, 45 degree angle, in dim warm lighting, amateur smartphone food photo, realistic",923222389
+sandwich,syn_sandwich_022.png,"a sandwich with fries on the side, close-up, on a paper wrapper, amateur smartphone food photo, realistic",936176495
+sandwich,syn_sandwich_023.png,"a sliced sandwich on sliced bread with lettuce and tomato, side view, on a wooden table, amateur smartphone food photo, realistic",850391261
+sandwich,syn_sandwich_024.png,"a deli sandwich on a baguette, side view, under bright natural window light, amateur smartphone food photo, realistic",268167672
+sandwich,syn_sandwich_025.png,"a submarine sandwich, top-down view, on a paper wrapper, amateur smartphone food photo, realistic",886435056
+sandwich,syn_sandwich_026.png,"a toasted ham and cheese sandwich, low angle shot, on a paper wrapper, amateur smartphone food photo, realistic",155554297
+sandwich,syn_sandwich_027.png,"a deli sandwich on a baguette, side view, on a kitchen counter, amateur smartphone food photo, realistic",601765290
+sandwich,syn_sandwich_028.png,"a grilled panini sandwich, side view, on a kitchen counter, amateur smartphone food photo, realistic",367880978
+sandwich,syn_sandwich_029.png,"a sandwich with fries on the side, low angle shot, in dim warm lighting, amateur smartphone food photo, realistic",729707163
+sandwich,syn_sandwich_030.png,"a club sandwich cut in half with toothpicks, low angle shot, outdoors at a picnic table, amateur smartphone food photo, realistic",947232791
+sandwich,syn_sandwich_031.png,"a toasted ham and cheese sandwich, side view, on a white plate, amateur smartphone food photo, realistic",18958234
+sandwich,syn_sandwich_032.png,"a sliced sandwich on sliced bread with lettuce and tomato, close-up, on a kitchen counter, amateur smartphone food photo, realistic",732827645
+sandwich,syn_sandwich_033.png,"a submarine sandwich, top-down view, in dim warm lighting, amateur smartphone food photo, realistic",453494505
+sandwich,syn_sandwich_034.png,"a deli sandwich on a baguette, close-up, outdoors at a picnic table, amateur smartphone food photo, realistic",981997361
+sandwich,syn_sandwich_035.png,"a sandwich with fries on the side, low angle shot, on a kitchen counter, amateur smartphone food photo, realistic",812874091
+sandwich,syn_sandwich_036.png,"a grilled panini sandwich, low angle shot, under bright natural window light, amateur smartphone food photo, realistic",328003093
+sandwich,syn_sandwich_037.png,"a deli sandwich on a baguette, low angle shot, on a white plate, amateur smartphone food photo, realistic",21678580
+sandwich,syn_sandwich_038.png,"a sliced sandwich on sliced bread with lettuce and tomato, low angle shot, on a wooden table, amateur smartphone food photo, realistic",991841236
+sandwich,syn_sandwich_039.png,"a deli sandwich on a baguette, low angle shot, on a kitchen counter, amateur smartphone food photo, realistic",424368998
+sushi,syn_sushi_000.png,"tuna nigiri on a wooden board, side view, on a white plate, amateur smartphone food photo, realistic",463119595
+sushi,syn_sushi_001.png,"tuna nigiri on a wooden board, top-down view, in dim warm lighting, amateur smartphone food photo, realistic",191113704
+sushi,syn_sushi_002.png,"salmon sushi rolls with chopsticks, low angle shot, on a wooden table, amateur smartphone food photo, realistic",979803907
+sushi,syn_sushi_003.png,"a maki sushi platter with wasabi and ginger, side view, on a kitchen counter, amateur smartphone food photo, realistic",862943594
+sushi,syn_sushi_004.png,"a plate of assorted nigiri sushi, low angle shot, in dim warm lighting, amateur smartphone food photo, realistic",35467328
+sushi,syn_sushi_005.png,"salmon sushi rolls with chopsticks, 45 degree angle, on a white plate, amateur smartphone food photo, realistic",370531119
+sushi,syn_sushi_006.png,"a sushi set in a restaurant, top-down view, on a paper wrapper, amateur smartphone food photo, realistic",783836294
+sushi,syn_sushi_007.png,"a sushi set in a restaurant, top-down view, on a white plate, amateur smartphone food photo, realistic",441909656
+sushi,syn_sushi_008.png,"tuna nigiri on a wooden board, top-down view, on a paper wrapper, amateur smartphone food photo, realistic",948193860
+sushi,syn_sushi_009.png,"salmon sushi rolls with chopsticks, side view, under bright natural window light, amateur smartphone food photo, realistic",618579365
+sushi,syn_sushi_010.png,"a plate of assorted nigiri sushi, 45 degree angle, on a kitchen counter, amateur smartphone food photo, realistic",478500362
+sushi,syn_sushi_011.png,"tuna nigiri on a wooden board, side view, on a paper wrapper, amateur smartphone food photo, realistic",173121948
+sushi,syn_sushi_012.png,"tuna nigiri on a wooden board, 45 degree angle, on a white plate, amateur smartphone food photo, realistic",977950775
+sushi,syn_sushi_013.png,"a maki sushi platter with wasabi and ginger, 45 degree angle, on a kitchen counter, amateur smartphone food photo, realistic",980088060
+sushi,syn_sushi_014.png,"salmon sushi rolls with chopsticks, top-down view, on a paper wrapper, amateur smartphone food photo, realistic",675318777
+sushi,syn_sushi_015.png,"a sushi set in a restaurant, close-up, on a white plate, amateur smartphone food photo, realistic",456110563
+sushi,syn_sushi_016.png,"salmon sushi rolls with chopsticks, close-up, outdoors at a picnic table, amateur smartphone food photo, realistic",665348206
+sushi,syn_sushi_017.png,"a maki sushi platter with wasabi and ginger, top-down view, on a wooden table, amateur smartphone food photo, realistic",894750012
+sushi,syn_sushi_018.png,"a sushi set in a restaurant, close-up, outdoors at a picnic table, amateur smartphone food photo, realistic",566367995
+sushi,syn_sushi_019.png,"a sushi set in a restaurant, top-down view, in dim warm lighting, amateur smartphone food photo, realistic",474828867
+sushi,syn_sushi_020.png,"a sushi set in a restaurant, side view, in dim warm lighting, amateur smartphone food photo, realistic",114511803
+sushi,syn_sushi_021.png,"a sushi set in a restaurant, low angle shot, outdoors at a picnic table, amateur smartphone food photo, realistic",699840467
+sushi,syn_sushi_022.png,"a sushi set in a restaurant, low angle shot, on a kitchen counter, amateur smartphone food photo, realistic",703658055
+sushi,syn_sushi_023.png,"a sushi set in a restaurant, top-down view, in dim warm lighting, amateur smartphone food photo, realistic",96401067
+sushi,syn_sushi_024.png,"a maki sushi platter with wasabi and ginger, low angle shot, in a restaurant, amateur smartphone food photo, realistic",684585903
+sushi,syn_sushi_025.png,"a plate of assorted nigiri sushi, 45 degree angle, under bright natural window light, amateur smartphone food photo, realistic",281407907
+sushi,syn_sushi_026.png,"a plate of assorted nigiri sushi, top-down view, under bright natural window light, amateur smartphone food photo, realistic",837814433
+sushi,syn_sushi_027.png,"a sushi set in a restaurant, top-down view, outdoors at a picnic table, amateur smartphone food photo, realistic",39019915
+sushi,syn_sushi_028.png,"a sushi set in a restaurant, low angle shot, on a kitchen counter, amateur smartphone food photo, realistic",115874848
+sushi,syn_sushi_029.png,"tuna nigiri on a wooden board, low angle shot, in a restaurant, amateur smartphone food photo, realistic",989124327
+sushi,syn_sushi_030.png,"a sushi set in a restaurant, top-down view, on a paper wrapper, amateur smartphone food photo, realistic",539291687
+sushi,syn_sushi_031.png,"a sushi set in a restaurant, close-up, on a paper wrapper, amateur smartphone food photo, realistic",620798903
+sushi,syn_sushi_032.png,"a sushi set in a restaurant, top-down view, outdoors at a picnic table, amateur smartphone food photo, realistic",929055523
+sushi,syn_sushi_033.png,"a sushi set in a restaurant, 45 degree angle, on a kitchen counter, amateur smartphone food photo, realistic",94363591
+sushi,syn_sushi_034.png,"a sushi set in a restaurant, side view, on a wooden table, amateur smartphone food photo, realistic",833185582
+sushi,syn_sushi_035.png,"a maki sushi platter with wasabi and ginger, top-down view, on a wooden table, amateur smartphone food photo, realistic",90333325
+sushi,syn_sushi_036.png,"a plate of assorted nigiri sushi, 45 degree angle, outdoors at a picnic table, amateur smartphone food photo, realistic",664680520
+sushi,syn_sushi_037.png,"tuna nigiri on a wooden board, low angle shot, on a white plate, amateur smartphone food photo, realistic",419699917
+sushi,syn_sushi_038.png,"tuna nigiri on a wooden board, top-down view, on a kitchen counter, amateur smartphone food photo, realistic",84509239
+sushi,syn_sushi_039.png,"a maki sushi platter with wasabi and ginger, 45 degree angle, outdoors at a picnic table, amateur smartphone food photo, realistic",416886277

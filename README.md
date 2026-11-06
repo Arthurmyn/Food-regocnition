@@ -80,6 +80,29 @@ streamlit run app/app.py                 # Streamlit version, or:
 uvicorn server.main:app --port 8000      # FastAPI + HTML version, then open http://localhost:8000
 ```
 
+## Dataset
+
+535 real photos in five classes (burger 112, hotdog 98, pizza 103, sandwich 117, sushi 105), collected and cleaned in
+Assignment 1 (34 wrong or duplicate images removed; the list and reasons are in the A1 report). Some photos come from
+the web, so the dataset is **not** redistributed in this repository.
+
+- Download: <https://drive.google.com/drive/folders/1D6uadjrY0yAQLyzzfscEyOCIu9pm_0kU?usp=sharing>
+- Google Drive refuses to list more than 50 files of a folder to scripts, so download the whole folder in the browser
+  (Drive packs it into a `.zip`), put the zip in the repository root, and run `python3 a1/prepare_dataset.py`.
+  It unpacks the images into `dataset/<class>/`, validates them (corrupt files, duplicates, sizes) and writes
+  `results/a1/dataset_report.txt`. Then `python3 a1/split_dataset.py` recreates the split (375 / 81 / 79, seed 42).
+- Running the app does **not** need the dataset: thumbnails of the training photos used by the nearest-neighbour view
+  are in `web/assets/train/`.
+
+## Model weights
+
+| Weights | Where they come from |
+|---|---|
+| `results/a2/linear_probe.pt` (16 MB): the deployed model | checked into this repository; rebuilt by `src/train_linear_probe.py` |
+| `results/a1/efficientnet_best.pt` (16 MB): A1 fine-tuned baseline | checked into this repository |
+| ImageNet EfficientNet-B0 backbone | downloaded automatically by torchvision on first use (`IMAGENET1K_V1`) |
+| SD-Turbo (only for regenerating synthetic images) | downloaded from Hugging Face by `src/generate_synthetic.py` (about 2 GB) |
+
 ## Final report, results, and inference files
 
 - [Assignment 2 report](results/a2/report.md) presents the dataset, method, results, ablations,

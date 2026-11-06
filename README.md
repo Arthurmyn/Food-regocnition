@@ -83,13 +83,13 @@ uvicorn server.main:app --port 8000      # FastAPI + HTML version, then open htt
 ## Dataset
 
 535 real photos in five classes (burger 112, hotdog 98, pizza 103, sandwich 117, sushi 105), collected and cleaned in
-Assignment 1 (34 wrong or duplicate images removed; the list and reasons are in the A1 report). Some photos come from
+Assignment 1 (34 wrong or duplicate images were removed; this cleaning is described in the A1 report). Some photos come from
 the web, so the dataset is **not** redistributed in this repository.
 
 - Download: <https://drive.google.com/drive/folders/1D6uadjrY0yAQLyzzfscEyOCIu9pm_0kU?usp=sharing>
 - Google Drive refuses to list more than 50 files of a folder to scripts, so download the whole folder in the browser
   (Drive packs it into a `.zip`), put the zip in the repository root, and run `python3 a1/prepare_dataset.py`.
-  It unpacks the images into `dataset/<class>/`, validates them (corrupt files, duplicates, sizes) and writes
+  It unpacks the images into `dataset/` (if the zip has an extra top-level folder, move the five class folders directly under `dataset/`), validates them (corrupt files, duplicates, sizes) and writes
   `results/a1/dataset_report.txt`. Then `python3 a1/split_dataset.py` recreates the split (375 / 81 / 79, seed 42).
 - Running the app does **not** need the dataset: thumbnails of the training photos used by the nearest-neighbour view
   are in `web/assets/train/`.
@@ -166,7 +166,7 @@ Input photo and what the app returns for it (`web/assets/example.jpg` is a real 
 
 ![Synthetic page](docs/screenshots/synthetic.jpg)
 
-Grad-CAM examples (one real test photo per class, including a wrong prediction) and nearest-neighbour retrieval:
+Grad-CAM examples (one real test photo per class) and nearest-neighbour retrieval:
 
 ![Grad-CAM examples](results/a2/gradcam_examples.png)
 ![Nearest neighbours](results/a2/nearest_neighbors.png)
